@@ -1,12 +1,18 @@
-import React from "react";
+import React from 'react';
 
-import Button from "@mui/material/Button";
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import WelcomeCard from './components/WelcomeCard';
+
+import theme from './assets/theme';
+import './App.css';
 
 function App() {
   return (
-    <div className="App">
-      <Button>helo</Button>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="App">
+        <WelcomeCard></WelcomeCard>
+      </div>
+    </ThemeProvider>
   );
 }
 
