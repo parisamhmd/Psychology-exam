@@ -17,6 +17,14 @@ const theme = createTheme({
             }
         `,
     },
+    MuiButton: {
+      styleOverrides: {
+        root: {
+          fontSize: '1.125rem',
+          textTransform: 'none',
+        },
+      },
+    },
   },
 });
 
