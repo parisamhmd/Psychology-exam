@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 
 import Button from '@mui/material/Button';
@@ -18,18 +19,19 @@ const useStyles = makeStyles({
   },
 });
 
-export default function LoginIn() {
+export default function LoginIn({ onClick: handleClick }) {
   const classes = useStyles();
-  const [error, setError] = React.useState(true);
+  const [error, setError] = React.useState(false);
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    setError(/^\d*$/.test(data.get('mobile-number')));
-    // eslint-disable-next-line no-console
-    console.log({
-      'mobile-number': data.get('mobile-number'),
-    });
+    if (!/^\d*$/.test(data.get('mobile-number'))) setError(true);
+    else {
+      handleClick({
+        'mobile-number': data.get('mobile-number'),
+      });
+    }
   };
 
   return (
@@ -40,7 +42,6 @@ export default function LoginIn() {
           <Box
             component="form"
             onSubmit={handleSubmit}
-            noValidate
             sx={{
               mt: 1,
               display: 'flex',
@@ -53,7 +54,7 @@ export default function LoginIn() {
               شماره موبایل
             </Typography>
             <TextField
-              error={!error}
+              error={error}
               required
               fullWidth
               id="mobile-number"
@@ -62,7 +63,7 @@ export default function LoginIn() {
               size="small"
               inputProps={{ maxLength: 11 }}
             />
-            {!error && (
+            {error && (
               <Typography variant="subtitle2" color="error">
                 شماره موبایل معتبر نمی باشد{' '}
               </Typography>

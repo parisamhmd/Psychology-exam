@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 
 import Table from '@mui/material/Table';
@@ -37,24 +38,24 @@ const rows = [
   createData('پرانرژی', 'energetic'),
 ];
 
-export default function BasicTable() {
+export default function BasicTable({ onClick: handleClick }) {
   const [selectedValue, setSelectedValue] = React.useState({
-    lively: 1,
-    happy: 4,
-    sad: 4,
-    tired: 4,
-    supportive: 4,
-    satisfied: 4,
-    pensive: 4,
-    restless: 4,
-    sleepy: 4,
-    bad_tempered: 4,
-    spirit: 4,
-    nervous: 4,
-    quiet: 4,
-    loving: 4,
-    bored: 4,
-    energetic: 4,
+    lively: undefined,
+    happy: undefined,
+    sad: undefined,
+    tired: undefined,
+    supportive: undefined,
+    satisfied: undefined,
+    pensive: undefined,
+    restless: undefined,
+    sleepy: undefined,
+    bad_tempered: undefined,
+    spirit: undefined,
+    nervous: undefined,
+    quiet: undefined,
+    loving: undefined,
+    bored: undefined,
+    energetic: undefined,
   });
 
   const handleChange = (event, id) => {
@@ -123,7 +124,12 @@ export default function BasicTable() {
             </TableBody>
           </Table>
         </TableContainer>
-        <Button type="submit" variant="contained" sx={{ mt: 5 }}>
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{ mt: 5 }}
+          onClick={() => handleClick(selectedValue)}
+        >
           ورود به آزمون
         </Button>
       </ContentWrapper>

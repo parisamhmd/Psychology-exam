@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import * as React from 'react';
 
 import Button from '@mui/material/Button';
@@ -6,14 +7,11 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { makeStyles } from '@mui/styles';
-import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 import ContentWrapper from '../assets/ContentWrapper';
-
-import loginImage from '../assets/images/login.jpg';
 
 const useStyles = makeStyles({
   textInputContainer: {
@@ -24,16 +22,18 @@ const useStyles = makeStyles({
   },
 });
 
-export default function FormData() {
+export default function PersonalInfoForm({ onClick: handleClick }) {
   const classes = useStyles();
 
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    // console.log({
-    //   'mobile-number': data.get('mobile-number'),
-    // });
+    handleClick({
+      name: data.get('name'),
+      age: data.get('age'),
+      gender: data.get('gender'),
+      education: data.get('education'),
+    });
   };
 
   return (
@@ -42,7 +42,6 @@ export default function FormData() {
         <Box
           component="form"
           onSubmit={handleSubmit}
-          // noValidate
           sx={{
             mt: 1,
             display: 'flex',
@@ -74,12 +73,12 @@ export default function FormData() {
             <TextField
               required
               fullWidth
-              id="mobile-number"
-              name="mobile-number"
+              id="age"
+              name="age"
               type="number"
               size="small"
               // TODO
-              inputProps={{ inputProps: { min: '5', max: 90 } }}
+              //   inputProps={{ inputProps: { min: '5', max: 90 } }}
             />
           </div>
           <div className={classes.textInputContainer}>
@@ -98,7 +97,13 @@ export default function FormData() {
               سطح تحصیلات
             </Typography>
             <FormControl fullWidth>
-              <Select size="small" required fullWidth id="gender" name="gender">
+              <Select
+                size="small"
+                required
+                fullWidth
+                id="education"
+                name="education"
+              >
                 <MenuItem value="under-diploma">زیر دیپلم</MenuItem>
                 <MenuItem value="diploma">دیپلم</MenuItem>
                 <MenuItem value="masters">دیپلم</MenuItem>
