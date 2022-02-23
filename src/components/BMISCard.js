@@ -87,38 +87,16 @@ export default function BasicTable({ onClick: handleClick }) {
                   sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                 >
                   <TableCell align="right">{row.name}</TableCell>
-                  <TableCell align="center" padding="none">
-                    <Radio
-                      checked={selectedValue[row.id] === 3}
-                      onChange={(e) => handleChange(e, row.id)}
-                      value="3"
-                      name="radio-buttons"
-                    />
-                  </TableCell>
-                  <TableCell align="center" padding="none">
-                    <Radio
-                      checked={selectedValue[row.id] === 2}
-                      onChange={(e) => handleChange(e, row.id)}
-                      value="2"
-                      name="radio-buttons"
-                    />
-                  </TableCell>
-                  <TableCell align="center" padding="none">
-                    <Radio
-                      checked={selectedValue[row.id] === 1}
-                      onChange={(e) => handleChange(e, row.id)}
-                      value="1"
-                      name="radio-buttons"
-                    />
-                  </TableCell>
-                  <TableCell align="center" padding="none">
-                    <Radio
-                      checked={selectedValue[row.id] === 0}
-                      onChange={(e) => handleChange(e, row.id)}
-                      value="0"
-                      name="radio-buttons"
-                    />
-                  </TableCell>
+                  {[3, 2, 1, 0].map((i) => (
+                    <TableCell key={i} align="center" padding="none">
+                      <Radio
+                        checked={selectedValue[row.id] === i}
+                        onChange={(e) => handleChange(e, row.id)}
+                        value={i}
+                        name="radio-buttons"
+                      />
+                    </TableCell>
+                  ))}
                 </TableRow>
               ))}
             </TableBody>
