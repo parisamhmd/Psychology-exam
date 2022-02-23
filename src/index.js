@@ -1,12 +1,26 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import axios from 'axios';
+import { QueryClient, QueryClientProvider } from 'react-query';
+import { ThemeProvider } from '@mui/material/styles';
+
+import theme from './assets/theme';
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+axios.defaults.baseURL = 'http://192.168.43.123:8000/task';
+
+const queryClient = new QueryClient();
+
 ReactDOM.render(
   <React.StrictMode>
-    <App className="body" />
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider theme={theme}>
+        <App className="body" />
+      </ThemeProvider>
+    </QueryClientProvider>
   </React.StrictMode>,
   document.getElementById('root')
 );

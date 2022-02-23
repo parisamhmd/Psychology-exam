@@ -1,21 +1,13 @@
 import React, { useState } from 'react';
 
-import {
-  useQuery,
-  useMutation,
-  useQueryClient,
-  QueryClient,
-  QueryClientProvider,
-} from 'react-query';
+import { useMutation, QueryClient } from 'react-query';
+import axios from 'axios';
 
-import { ThemeProvider } from '@mui/material/styles';
 import WelcomeCard from './components/WelcomeCard';
 import LoginCard from './components/LoginCard';
 import PersonalInfoForm from './components/PersonalInfoForm';
 import BMISCARD from './components/BMISCard';
-//  172.27.224.1
 
-import theme from './assets/theme';
 import './App.css';
 
 const queryClient = new QueryClient();
@@ -24,11 +16,21 @@ function App() {
   const [step, setStep] = useState(1);
   const [registrationData, setRegistrationData] = useState({});
 
-  //   const { mutate } = useMutation(postTodo, {
+  const register = async (data) => {
+    await axios.post('/register', data);
+  };
+  //   const { mutate: create } = useMutation(createArtist, {
   //     onSuccess: () => {
-  //       setStep(4);
+  //       history.push('/artists');
+  //       alert.success({ text: 'هنرمند با موفقیت افزوده شد' });
   //     },
+  //     onError: (error) => {},
   //   });
+  const { mutate } = useMutation(register, {
+    onSuccess: () => {
+      setStep(4);
+    },
+  });
 
   const stepsArray = [
     {
@@ -51,7 +53,8 @@ function App() {
       component: (
         <PersonalInfoForm
           onClick={(data) => {
-            // mutate({ ...registrationData, ...data });
+            console.log({ ...registrationData, ...data });
+            mutate({ ...registrationData, ...data });
           }}
         />
       ),
@@ -63,13 +66,9 @@ function App() {
   ];
 
   return (
-    <ThemeProvider theme={theme}>
-      <QueryClientProvider client={queryClient}>
-        <div className="App">
-          {stepsArray.map((item) => item.id === step && item.component)}
-        </div>
-      </QueryClientProvider>
-    </ThemeProvider>
+    <div className="App">
+      {stepsArray.map((item) => item.id === step && item.component)}
+    </div>
   );
 }
 

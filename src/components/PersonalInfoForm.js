@@ -30,9 +30,10 @@ export default function PersonalInfoForm({ onClick: handleClick }) {
     const data = new FormData(event.currentTarget);
     handleClick({
       name: data.get('name'),
-      age: data.get('age'),
+      family_name: data.get('family_name'),
+      age: +data.get('age'),
       gender: data.get('gender'),
-      education: data.get('education'),
+      education_level: +data.get('education_level'),
     });
   };
 
@@ -53,7 +54,7 @@ export default function PersonalInfoForm({ onClick: handleClick }) {
         >
           <div className={classes.textInputContainer}>
             <Typography component="h6" variant="subtitle1">
-              نام و نام‌خاوندگی
+              نام
             </Typography>
             <TextField
               required
@@ -62,8 +63,20 @@ export default function PersonalInfoForm({ onClick: handleClick }) {
               name="name"
               autoFocus
               size="small"
-              //   TODO
-              inputProps={{ maxLength: 150 }}
+              inputProps={{ maxLength: 100 }}
+            />
+          </div>
+          <div className={classes.textInputContainer}>
+            <Typography component="h6" variant="subtitle1">
+              نام‌خانودگی
+            </Typography>
+            <TextField
+              required
+              fullWidth
+              id="family_name"
+              name="family_name"
+              size="small"
+              inputProps={{ maxLength: 100 }}
             />
           </div>
           <div className={classes.textInputContainer}>
@@ -87,8 +100,8 @@ export default function PersonalInfoForm({ onClick: handleClick }) {
             </Typography>
             <FormControl fullWidth>
               <Select size="small" required fullWidth id="gender" name="gender">
-                <MenuItem value="women">زن</MenuItem>
-                <MenuItem value="man">مرد</MenuItem>
+                <MenuItem value="female">زن</MenuItem>
+                <MenuItem value="male">مرد</MenuItem>
               </Select>
             </FormControl>
           </div>
@@ -101,18 +114,17 @@ export default function PersonalInfoForm({ onClick: handleClick }) {
                 size="small"
                 required
                 fullWidth
-                id="education"
-                name="education"
+                id="education_level"
+                name="education_level"
               >
-                <MenuItem value="under-diploma">زیر دیپلم</MenuItem>
-                <MenuItem value="diploma">دیپلم</MenuItem>
-                <MenuItem value="masters">دیپلم</MenuItem>
-                <MenuItem value="Bsc">کارشناسی ارشد</MenuItem>
-                <MenuItem value="phd">دکترا و بالاتر</MenuItem>
+                <MenuItem value="1">زیر دیپلم</MenuItem>
+                <MenuItem value="2">دیپلم</MenuItem>
+                <MenuItem value="3">کارشناسی</MenuItem>
+                <MenuItem value="4">کارشناسی ارشد</MenuItem>
+                <MenuItem value="5">دکترا و بالاتر</MenuItem>
               </Select>
             </FormControl>
           </div>
-          {/* TODO */}
           <Button
             type="submit"
             fullWidth

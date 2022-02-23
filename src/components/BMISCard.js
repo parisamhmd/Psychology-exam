@@ -66,7 +66,7 @@ export default function BasicTable({ onClick: handleClick }) {
     <Container component="main" maxWidth="lg">
       <ContentWrapper>
         <Typography component="h6" variant="subtitle1" sx={{ mb: 1 }}>
-          هر کدام از صفتهای زیر چقدر در مورد خلق شما صدق می‌کند؟ لطفاً علامت
+          هر کدام از صفت های زیر چقدر در مورد خلق شما صدق می‌کند؟ لطفاً علامت
           بزنید{' '}
         </Typography>
         <TableContainer component={Paper}>
@@ -89,14 +89,6 @@ export default function BasicTable({ onClick: handleClick }) {
                   <TableCell align="right">{row.name}</TableCell>
                   <TableCell align="center" padding="none">
                     <Radio
-                      checked={selectedValue[row.id] === 4}
-                      onChange={(e) => handleChange(e, row.id)}
-                      value="4"
-                      name="radio-buttons"
-                    />
-                  </TableCell>
-                  <TableCell align="center" padding="none">
-                    <Radio
                       checked={selectedValue[row.id] === 3}
                       onChange={(e) => handleChange(e, row.id)}
                       value="3"
@@ -116,6 +108,14 @@ export default function BasicTable({ onClick: handleClick }) {
                       checked={selectedValue[row.id] === 1}
                       onChange={(e) => handleChange(e, row.id)}
                       value="1"
+                      name="radio-buttons"
+                    />
+                  </TableCell>
+                  <TableCell align="center" padding="none">
+                    <Radio
+                      checked={selectedValue[row.id] === 0}
+                      onChange={(e) => handleChange(e, row.id)}
+                      value="0"
                       name="radio-buttons"
                     />
                   </TableCell>

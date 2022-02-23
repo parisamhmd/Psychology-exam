@@ -26,10 +26,10 @@ export default function LoginIn({ onClick: handleClick }) {
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    if (!/^\d*$/.test(data.get('mobile-number'))) setError(true);
+    if (!/^09[0-9]{9}$/.test(data.get('mobile_number'))) setError(true);
     else {
       handleClick({
-        'mobile-number': data.get('mobile-number'),
+        mobile_number: data.get('mobile_number'),
       });
     }
   };
@@ -57,8 +57,8 @@ export default function LoginIn({ onClick: handleClick }) {
               error={error}
               required
               fullWidth
-              id="mobile-number"
-              name="mobile-number"
+              id="mobile_number"
+              name="mobile_number"
               autoFocus
               size="small"
               inputProps={{ maxLength: 11 }}
