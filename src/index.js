@@ -10,7 +10,7 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
-axios.defaults.baseURL = 'http://192.168.43.123:8000/task';
+axios.defaults.baseURL = 'http://5.160.1.186:13001/task';
 
 const queryClient = new QueryClient();
 

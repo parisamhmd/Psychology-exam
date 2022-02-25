@@ -12,6 +12,7 @@ import Container from '@mui/material/Container';
 import Radio from '@mui/material/Radio';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 
 import ContentWrapper from '../assets/ContentWrapper';
 
@@ -65,10 +66,23 @@ export default function BasicTable({ onClick: handleClick }) {
   return (
     <Container component="main" maxWidth="lg">
       <ContentWrapper>
-        <Typography component="h6" variant="subtitle1" sx={{ mb: 1 }}>
-          هر کدام از صفت های زیر چقدر در مورد خلق شما صدق می‌کند؟ لطفاً علامت
-          بزنید{' '}
-        </Typography>
+        <Box
+          sx={{
+            mt: 1,
+            display: 'flex',
+            flexDirection: 'column',
+            justifyContent: 'start',
+            alignItems: 'start',
+          }}
+        >
+          <Typography component="h6" variant="h5" sx={{ mb: 1 }}>
+            در این مرحله به مقیاس کوتاه درون‌نگری خلق پاسخ می‌دهید.
+          </Typography>
+          <Typography component="h6" variant="subtitle1" sx={{ mb: 4 }}>
+            هر کدام از صفت های زیر چقدر در مورد خلق شما صدق می‌کند؟ لطفاً علامت
+            بزنید{' '}
+          </Typography>
+        </Box>
         <TableContainer component={Paper}>
           <Table sx={{ minWidth: 650 }} aria-label="simple table">
             <TableHead>
@@ -108,7 +122,7 @@ export default function BasicTable({ onClick: handleClick }) {
           sx={{ mt: 5 }}
           onClick={() => handleClick(selectedValue)}
         >
-          ورود به آزمون
+          پایان مرحلۀ اول آزمون{' '}
         </Button>
       </ContentWrapper>
     </Container>

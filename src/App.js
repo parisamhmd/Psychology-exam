@@ -1,19 +1,20 @@
 import React, { useState } from 'react';
 
-import { useMutation, QueryClient } from 'react-query';
+import { useQuery, useMutation, QueryClient } from 'react-query';
 import axios from 'axios';
 
 import WelcomeCard from './components/WelcomeCard';
 import LoginCard from './components/LoginCard';
 import PersonalInfoForm from './components/PersonalInfoForm';
 import BMISCARD from './components/BMISCard';
+import ShowPictures from './components/ShowPictures';
 
 import './App.css';
 
 const queryClient = new QueryClient();
 
 function App() {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(4);
   const [registrationData, setRegistrationData] = useState({});
 
   const register = async (data) => {
@@ -61,7 +62,24 @@ function App() {
     },
     {
       id: 4,
-      component: <BMISCARD />,
+      component: (
+        <BMISCARD
+          onClick={(data) => {
+            console.log(data);
+            setStep(5);
+          }}
+        />
+      ),
+    },
+    {
+      id: 5,
+      component: (
+        <ShowPictures
+          onClick={(data) => {
+            // console.log(data);
+          }}
+        />
+      ),
     },
   ];
 
