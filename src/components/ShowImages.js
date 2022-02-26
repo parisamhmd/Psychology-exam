@@ -2,9 +2,11 @@
 import React from 'react';
 
 import Typography from '@mui/material/Typography';
+import Button from '@mui/material/Button';
 import { makeStyles } from '@mui/styles';
 
 import RobotsCard from './RobotsCard';
+import ContentWrapper from '../assets/ContentWrapper';
 
 const useStyles = makeStyles({
   imageContainer: {
@@ -13,7 +15,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ShowImages({ images }) {
+export default function ShowImages({ images, onClick: handleClick }) {
   const classes = useStyles();
 
   const [item, setItem] = React.useState(0);
@@ -80,19 +82,21 @@ export default function ShowImages({ images }) {
       setCountDownIntervention(1);
       setItem((item) => item + 1);
       setShow('robots_after');
-      //   setShow('images');
-      //   setRunTimer(true);
     }
   }, [countDownIntervention, runInterventionTimer]);
 
   React.useEffect(() => {
     if (item > 9) {
-      setShow(undefined);
+      //   setShow(undefined);
     }
   }, [item]);
 
   const renderTrial = () => (
-    <div style={{ width: '50rem' }}>
+    <div
+      style={{
+        width: '50rem',
+      }}
+    >
       {show === 'images' ? (
         <>
           {/*  TODO save data with id of image   */}
@@ -109,7 +113,11 @@ export default function ShowImages({ images }) {
           لطفا احساس خود را با انتخاب یک عدد (از 1 تا 9) از آدمک‌های ردیف اول و یک عدد از آدمک‌های ردیف دوم (1 تا 9) نشان دهید.
           "
           onChange={(valence, arousal) => {
-            setData({ valence_before: valence, arousal_before: arousal });
+            setData({
+              ...data,
+              valence_before: valence,
+              arousal_before: arousal,
+            });
             setShow('intervention');
             setRunInterventionTimer(true);
           }}
@@ -132,7 +140,11 @@ export default function ShowImages({ images }) {
           ردیف اول و یک عدد از آدمک‌های ردیف دوم (1 تا 9) نشان دهید.
           "
           onChange={(valence, arousal) => {
-            setData({ valence_after: valence, arousal_after: arousal });
+            setData({
+              ...data,
+              valence_after: valence,
+              arousal_after: arousal,
+            });
             setShow('images');
             setRunTimer(true);
           }}
@@ -140,5 +152,30 @@ export default function ShowImages({ images }) {
       ) : null}
     </div>
   );
-  return <div>{item < 10 ? renderTrial() : 'kk'}</div>;
+  return (
+    <div>
+      {item < 5 ? (
+        renderTrial()
+      ) : (
+        <ContentWrapper>
+          <Typography component="h6" variant="h5">
+            پایان مرحلۀ دوم آزمون{' '}
+          </Typography>
+          <Button
+            variant="contained"
+            onClick={() => {
+              handleClick(data);
+            }}
+            sx={{ mt: 5 }}
+          >
+            ورود به مرحلۀ سوم آزمون
+          </Button>
+          <Typography component="h6" variant="subtitle1">
+            در این مرحله ده تصویر قبل را مشاهده خواهید کرد. لطفاً طبق دستورالعمل
+            زیر هر تصویر عمل کنید.
+          </Typography>
+        </ContentWrapper>
+      )}
+    </div>
+  );
 }

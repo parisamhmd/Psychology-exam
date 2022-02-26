@@ -76,7 +76,7 @@ function App() {
       component: (
         <StartSecondLevel
           onClick={(data) => {
-            // console.log(data);
+            console.log('dadad:  ', data);
           }}
         />
       ),
