@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
 import Container from '@mui/material/Container';
 import { makeStyles } from '@mui/styles';
 import Typography from '@mui/material/Typography';
@@ -30,7 +29,7 @@ const useStyles = makeStyles({
     objectFit: 'cover',
   },
 });
-export default function RobotsCard({ onChange: handleChange }) {
+export default function RobotsCard({ description, onChange: handleChange }) {
   const classes = useStyles();
   const [valence, setValence] = useState(null);
   const [arousal, setArousal] = useState(null);
@@ -68,6 +67,11 @@ export default function RobotsCard({ onChange: handleChange }) {
   return (
     <Container component="main" maxWidth="xl">
       <ContentWrapper>
+        <Grid xs={11}>
+          <Typography component="h6" variant="subtitle1" sx={{ mb: 3, mx: 2 }}>
+            {description}
+          </Typography>
+        </Grid>
         <Grid
           container
           sx={{ gap: 2 }}
