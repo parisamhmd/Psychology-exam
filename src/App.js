@@ -7,14 +7,14 @@ import WelcomeCard from './components/WelcomeCard';
 import LoginCard from './components/LoginCard';
 import PersonalInfoForm from './components/PersonalInfoForm';
 import BMISCARD from './components/BMISCard';
-import ShowPictures from './components/ShowPictures';
+import StartSecondLevel from './components/StartSecondLevel';
 
 import './App.css';
 
 const queryClient = new QueryClient();
 
 function App() {
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(5);
   const [registrationData, setRegistrationData] = useState({});
 
   const register = async (data) => {
@@ -74,7 +74,7 @@ function App() {
     {
       id: 5,
       component: (
-        <ShowPictures
+        <StartSecondLevel
           onClick={(data) => {
             // console.log(data);
           }}

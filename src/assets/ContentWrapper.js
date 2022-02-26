@@ -8,6 +8,7 @@ const useStyles = makeStyles({
     borderRadius: '10px',
     boxShadow: '0px 0px 20px 5px #d8dde2',
     padding: '3rem',
+    width: '100%',
   },
 });
 const ContentWrapper = ({ children }) => {
