@@ -1,4 +1,5 @@
-import { useState } from 'react';
+/* eslint-disable react/prop-types */
+import { useState, useEffect } from 'react';
 
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
@@ -29,10 +30,40 @@ const useStyles = makeStyles({
     objectFit: 'cover',
   },
 });
-export default function RobotsCard() {
+export default function RobotsCard({ onChange: handleChange }) {
   const classes = useStyles();
-  const [valence, setValence] = useState(undefined);
-  const [arousal, setArousal] = useState(undefined);
+  const [valence, setValence] = useState(null);
+  const [arousal, setArousal] = useState(null);
+  const [countDownTrial, setCountDownTrial] = useState(1);
+  const [runTimer, setRunTimer] = useState(false);
+
+  useEffect(() => {
+    setRunTimer(true);
+  }, []);
+
+  useEffect(() => {
+    let timerIdTrial;
+
+    if (runTimer) {
+      // TODO  change to 10
+      setCountDownTrial(3);
+      timerIdTrial = setInterval(() => {
+        setCountDownTrial((countDown) => countDown - 1);
+      }, 1000);
+    } else {
+      clearInterval(timerIdTrial);
+    }
+
+    return () => clearInterval(timerIdTrial);
+  }, [runTimer]);
+
+  useEffect(() => {
+    if (countDownTrial < 1 && runTimer) {
+      setRunTimer(false);
+      setCountDownTrial(1);
+      handleChange(valence, arousal);
+    }
+  }, [countDownTrial, runTimer]);
 
   return (
     <Container component="main" maxWidth="xl">

@@ -13,7 +13,11 @@ import axios from 'axios';
 
 import ShowImages from './ShowImages';
 
-import loginImage from '../assets/images/login.jpg';
+import a1 from '../assets/images/a1.png';
+import a2 from '../assets/images/a2.png';
+import a3 from '../assets/images/a3.png';
+import a4 from '../assets/images/a4.png';
+import a5 from '../assets/images/a5.png';
 
 export default function ShowPictures() {
   const [countDown, setCountDown] = React.useState(1);
@@ -131,7 +135,7 @@ export default function ShowPictures() {
               </CardContent>
             </Card>
           ) : (
-            <ShowImages images={[loginImage, loginImage, loginImage]} />
+            <ShowImages images={[a1, a2, a3, a4, a5, a1, a2, a3, a4, a5]} />
           )}
         </>
       )}
