@@ -16,7 +16,7 @@ import './App.css';
 const queryClient = new QueryClient();
 
 function App() {
-  const [step, setStep] = useState(5);
+  const [step, setStep] = useState(1);
   const [registrationData, setRegistrationData] = useState({});
 
   const register = async (data) => {

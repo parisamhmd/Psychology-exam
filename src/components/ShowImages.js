@@ -154,7 +154,7 @@ export default function ShowImages({ images, onClick: handleClick }) {
   );
   return (
     <div>
-      {item < 5 ? (
+      {item < 10 ? (
         renderTrial()
       ) : (
         <ContentWrapper>
