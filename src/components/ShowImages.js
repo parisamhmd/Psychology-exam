@@ -15,7 +15,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function ShowImages({ images, onClick: handleClick }) {
+export default function ShowImages({ type, images, onClick: handleClick }) {
   const classes = useStyles();
 
   const [item, setItem] = React.useState(0);
@@ -106,7 +106,6 @@ export default function ShowImages({ images, onClick: handleClick }) {
         </>
       ) : show === 'robots_bofore' ? (
         <RobotsCard
-          // TODO save data with id of image
           description="
           لطفا احساس خود را با انتخاب یک عدد (از 1 تا 9) از آدمک‌های ردیف اول و یک عدد از آدمک‌های ردیف دوم (1 تا 9) نشان دهید.
           "
@@ -126,9 +125,12 @@ export default function ShowImages({ images, onClick: handleClick }) {
       ) : show === 'intervention' ? (
         <>
           <img src={images[item]?.picture} className={classes.imageContainer} />
-          <Typography component="h6" variant="subtitle1">
-            • به تصویر نگاه کنید • صحنه را توصیف کنید • در مورد موضوع دیگری صحبت
-            کنید • هیجان غالب خود را تکرار کنید به دقت نگاه کنید{' '}
+          <Typography component="h6" variant="h6" sx={{ mt: 2 }}>
+            {type === 'see' && 'به تصویر نگاه کنید'}
+            {type === 'description' && 'صحنه را توصیف کنید'}
+            {type === 'speak' && 'در مورد موضوع دیگری صحبت کنید'}
+            {type === 'repeat' &&
+              'هیجان غالب خود را تکرار کنید به دقت نگاه کنید'}
           </Typography>
         </>
       ) : show === 'robots_after' ? (

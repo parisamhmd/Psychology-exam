@@ -12,6 +12,7 @@ import AddIcon from '@mui/icons-material/Add';
 import ShowImages from './ShowImages';
 
 export default function ShowPictures({
+  type,
   images,
   isLoading,
   onClick: handleClick,
@@ -125,7 +126,7 @@ export default function ShowPictures({
               </CardContent>
             </Card>
           ) : (
-            <ShowImages images={images} onClick={handleClick} />
+            <ShowImages type={type} images={images} onClick={handleClick} />
           )}
         </>
       )}

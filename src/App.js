@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { useParams } from 'react-router-dom';
 
-import { useQuery, useMutation, QueryClient } from 'react-query';
+import { useQuery, useMutation } from 'react-query';
 import axios from 'axios';
 
 import WelcomeCard from './components/WelcomeCard';
@@ -14,6 +15,8 @@ import ThanksCard from './components/ThanksCard';
 import './App.css';
 
 function App() {
+  const { link } = useParams();
+
   const [step, setStep] = useState(5);
   const [registrationData, setRegistrationData] = useState({});
   const [applyData, setApplyData] = useState({});
@@ -88,6 +91,7 @@ function App() {
         <SecondLevel
           isLoading={!status || status === 'loading'}
           images={images}
+          type={link ?? 'see'}
           onClick={(data) => {
             setApplyData({
               ...applyData,
