@@ -45,7 +45,7 @@ export default function RobotsCard({ description, onChange: handleChange }) {
 
     if (runTimer) {
       // TODO  change to 10
-      setCountDownTrial(3);
+      setCountDownTrial(1);
       timerIdTrial = setInterval(() => {
         setCountDownTrial((countDown) => countDown - 1);
       }, 1000);

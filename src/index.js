@@ -12,7 +12,13 @@ import reportWebVitals from './reportWebVitals';
 
 axios.defaults.baseURL = 'http://5.160.1.186:13001/task';
 
-const queryClient = new QueryClient();
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      refetchOnWindowFocus: false,
+    },
+  },
+});
 
 ReactDOM.render(
   <React.StrictMode>

@@ -40,7 +40,7 @@ export default function ShowImages({ images, onClick: handleClick }) {
 
     if (runTimer) {
       // TODO 5ms
-      setCountDownTrial(2);
+      setCountDownTrial(1);
       timerIdTrial = setInterval(() => {
         setCountDownTrial((countDown) => countDown - 1);
       }, 1000);
@@ -65,7 +65,7 @@ export default function ShowImages({ images, onClick: handleClick }) {
 
     if (runInterventionTimer) {
       // TODO 30ms
-      setCountDownIntervention(3);
+      setCountDownIntervention(1);
       timerIdIntervention = setInterval(() => {
         setCountDownIntervention((countDown) => countDown - 1);
       }, 1000);
@@ -80,7 +80,6 @@ export default function ShowImages({ images, onClick: handleClick }) {
     if (countDownIntervention < 1 && runInterventionTimer) {
       setRunInterventionTimer(false);
       setCountDownIntervention(1);
-      setItem((item) => item + 1);
       setShow('robots_after');
     }
   }, [countDownIntervention, runInterventionTimer]);
@@ -100,10 +99,8 @@ export default function ShowImages({ images, onClick: handleClick }) {
     >
       {show === 'images' ? (
         <>
-          {/*  TODO save data with id of image   */}
-          <img src={images[item]} className={classes.imageContainer} />
+          <img src={images[item]?.picture} className={classes.imageContainer} />
           <Typography component="h6" variant="subtitle1" sx={{ mt: 2 }}>
-            countDownTrial: {countDownTrial}
             به دقت به تصویر نگاه کنید{' '}
           </Typography>
         </>
@@ -116,8 +113,11 @@ export default function ShowImages({ images, onClick: handleClick }) {
           onChange={(valence, arousal) => {
             setData({
               ...data,
-              valence_before: valence,
-              arousal_before: arousal,
+              [images[item].id]: {
+                ...data[images[item].id],
+                valence_before: valence,
+                arousal_before: arousal,
+              },
             });
             setShow('intervention');
             setRunInterventionTimer(true);
@@ -125,17 +125,14 @@ export default function ShowImages({ images, onClick: handleClick }) {
         />
       ) : show === 'intervention' ? (
         <>
-          {/* TODO ID  */}
-          <img src={images[item]} className={classes.imageContainer} />
+          <img src={images[item]?.picture} className={classes.imageContainer} />
           <Typography component="h6" variant="subtitle1">
-            countDownIntervention{item}: {countDownIntervention}• به تصویر نگاه
-            کنید • صحنه را توصیف کنید • در مورد موضوع دیگری صحبت کنید • هیجان
-            غالب خود را تکرار کنید به دقت نگاه کنید{' '}
+            • به تصویر نگاه کنید • صحنه را توصیف کنید • در مورد موضوع دیگری صحبت
+            کنید • هیجان غالب خود را تکرار کنید به دقت نگاه کنید{' '}
           </Typography>
         </>
       ) : show === 'robots_after' ? (
         <RobotsCard
-          // TODO save data with id of image
           description="
           لطفا مجدداً احساس خود را با انتخاب یک عدد (از 1 تا 9) از آدمک‌های
           ردیف اول و یک عدد از آدمک‌های ردیف دوم (1 تا 9) نشان دهید.
@@ -143,9 +140,13 @@ export default function ShowImages({ images, onClick: handleClick }) {
           onChange={(valence, arousal) => {
             setData({
               ...data,
-              valence_after: valence,
-              arousal_after: arousal,
+              [images[item].id]: {
+                ...data[images[item].id],
+                valence_after: valence,
+                arousal_after: arousal,
+              },
             });
+            setItem((item) => item + 1);
             setShow('images');
             setRunTimer(true);
           }}

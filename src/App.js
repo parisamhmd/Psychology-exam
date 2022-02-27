@@ -11,17 +11,12 @@ import SecondLevel from './components/SecondLevel';
 import ThirdLevel from './components/ThirdLevel';
 import ThanksCard from './components/ThanksCard';
 
-import a1 from './assets/images/a1.png';
-import a2 from './assets/images/a2.png';
-import a3 from './assets/images/a3.png';
-import a4 from './assets/images/a4.png';
-import a5 from './assets/images/a5.png';
-
 import './App.css';
 
 function App() {
-  const [step, setStep] = useState(6);
+  const [step, setStep] = useState(5);
   const [registrationData, setRegistrationData] = useState({});
+  const [applyData, setApplyData] = useState({});
 
   const getImages = async () => {
     const res = await axios.get('/images');
@@ -45,6 +40,8 @@ function App() {
       setStep(4);
     },
   });
+
+  console.log('applyData: ', applyData);
 
   const stepsArray = [
     {
@@ -79,7 +76,7 @@ function App() {
         <BMISCARD
           buttonTitle="پایان مرحلۀ اول آزمون"
           onClick={(data) => {
-            console.log(data);
+            setApplyData({ ...applyData, BMIS_before: data });
             setStep(5);
           }}
         />
@@ -90,10 +87,16 @@ function App() {
       component: (
         <SecondLevel
           isLoading={!status || status === 'loading'}
-          images={[a1, a2, a3, a4, a5, a1, a2, a3, a4, a5]}
-          onClick={(data, images) => {
-            console.log(images);
-            setStep(7);
+          images={images}
+          onClick={(data) => {
+            setApplyData({
+              ...applyData,
+              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => ({
+                image: item,
+                ...data[item],
+              })),
+            });
+            setStep(6);
           }}
         />
       ),
@@ -102,9 +105,15 @@ function App() {
       id: 6,
       component: (
         <ThirdLevel
-          images={[a1, a2, a3, a4, a5, a1, a2, a3, a4, a5]}
+          images={images}
           onClick={(data) => {
-            console.log(data);
+            setApplyData({
+              ...applyData,
+              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => ({
+                reaction_time: data[item],
+                ...applyData.image_actions[item],
+              })),
+            });
             setStep(7);
           }}
         />
@@ -116,7 +125,7 @@ function App() {
         <BMISCARD
           buttonTitle="پایان آزمون"
           onClick={(data) => {
-            console.log(data);
+            setApplyData({ ...applyData, BMIS_after: data });
             // TODO call mutate and set step on success
             setStep(8);
           }}

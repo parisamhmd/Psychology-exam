@@ -34,7 +34,7 @@ export default function ThirdLevel({ images, onClick: handleClick }) {
     >
       {item < 10 ? (
         <>
-          <img src={images[item]} className={classes.imageContainer} />
+          <img src={images[item].picture} className={classes.imageContainer} />
           <Button
             variant="contained"
             onClick={() => {
@@ -55,6 +55,7 @@ export default function ThirdLevel({ images, onClick: handleClick }) {
           <Button
             variant="contained"
             onClick={() => {
+              // TODO handle id
               handleClick(data);
             }}
             sx={{ my: 5 }}
