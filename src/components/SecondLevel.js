@@ -19,7 +19,7 @@ import a3 from '../assets/images/a3.png';
 import a4 from '../assets/images/a4.png';
 import a5 from '../assets/images/a5.png';
 
-export default function ShowPictures({ onClick }) {
+export default function ShowPictures({ onClick: handleClick }) {
   const [countDown, setCountDown] = React.useState(1);
   const [countDownTrial, setCountDownTrial] = React.useState(1);
   const [runTimer, setRunTimer] = React.useState(false);
@@ -137,7 +137,7 @@ export default function ShowPictures({ onClick }) {
           ) : (
             <ShowImages
               images={[a1, a2, a3, a4, a5, a1, a2, a3, a4, a5]}
-              onChange={onClick}
+              onClick={handleClick}
             />
           )}
         </>

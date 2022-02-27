@@ -166,13 +166,21 @@ export default function ShowImages({ images, onClick: handleClick }) {
             onClick={() => {
               handleClick(data);
             }}
-            sx={{ mt: 5 }}
+            sx={{ my: 5 }}
           >
             ورود به مرحلۀ سوم آزمون
           </Button>
           <Typography component="h6" variant="subtitle1">
             در این مرحله ده تصویر قبل را مشاهده خواهید کرد. لطفاً طبق دستورالعمل
             زیر هر تصویر عمل کنید.
+          </Typography>
+          <Typography component="h6" variant="subtitle2" sx={{ mt: 3 }}>
+            برای تصاویر مثبت: لطفاً تا زمانی که علاقه دارید به تصویر نگاه کنید.
+            در غیر این صورت با انتخاب دگمۀ کافی به مرحلۀ بعد بروید.
+          </Typography>
+          <Typography component="h6" variant="subtitle2" sx={{ mt: 3 }}>
+            برای تصاویر منفی: لطفاً تا زمانی که تحمل تماشای تصویر را دارید آن را
+            نگاه کنید. در غیر این صورت با انتخاب دگمۀ کافی به مرحلۀ بعد بروید.
           </Typography>
         </ContentWrapper>
       )}

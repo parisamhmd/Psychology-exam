@@ -7,7 +7,9 @@ import WelcomeCard from './components/WelcomeCard';
 import LoginCard from './components/LoginCard';
 import PersonalInfoForm from './components/PersonalInfoForm';
 import BMISCARD from './components/BMISCard';
-import StartSecondLevel from './components/StartSecondLevel';
+import SecondLevel from './components/SecondLevel';
+import ThirdLevel from './components/ThirdLevel';
+import ThanksCard from './components/ThanksCard';
 
 import './App.css';
 
@@ -64,6 +66,7 @@ function App() {
       id: 4,
       component: (
         <BMISCARD
+          buttonTitle="پایان مرحلۀ اول آزمون"
           onClick={(data) => {
             console.log(data);
             setStep(5);
@@ -74,12 +77,33 @@ function App() {
     {
       id: 5,
       component: (
-        <StartSecondLevel
+        <SecondLevel
           onClick={(data) => {
+            setStep(7);
             console.log('dadad:  ', data);
           }}
         />
       ),
+    },
+    {
+      id: 6,
+      component: <ThirdLevel onClick={(data) => {}} />,
+    },
+    {
+      id: 7,
+      component: (
+        <BMISCARD
+          buttonTitle="پایان آزمون"
+          onClick={(data) => {
+            console.log(data);
+            setStep(8);
+          }}
+        />
+      ),
+    },
+    {
+      id: 8,
+      component: <ThanksCard />,
     },
   ];
 

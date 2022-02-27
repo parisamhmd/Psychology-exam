@@ -39,7 +39,7 @@ const rows = [
   createData('پرانرژی', 'energetic'),
 ];
 
-export default function BasicTable({ onClick: handleClick }) {
+export default function BasicTable({ buttonTitle, onClick: handleClick }) {
   const [selectedValue, setSelectedValue] = React.useState({
     lively: undefined,
     happy: undefined,
@@ -64,7 +64,7 @@ export default function BasicTable({ onClick: handleClick }) {
   };
 
   return (
-    <Container component="main" maxWidth="lg">
+    <Container component="main" maxWidth="md">
       <ContentWrapper>
         <Box
           sx={{
@@ -122,7 +122,7 @@ export default function BasicTable({ onClick: handleClick }) {
           sx={{ mt: 5 }}
           onClick={() => handleClick(selectedValue)}
         >
-          پایان مرحلۀ اول آزمون{' '}
+          {buttonTitle}
         </Button>
       </ContentWrapper>
     </Container>

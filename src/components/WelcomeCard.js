@@ -7,7 +7,7 @@ import Container from '@mui/material/Container';
 
 import ContentWrapper from '../assets/ContentWrapper';
 
-export default function SignIn({ onClick: handleClick }) {
+export default function WellComeCard({ onClick: handleClick }) {
   return (
     <Container component="main" maxWidth="lg">
       <ContentWrapper>
