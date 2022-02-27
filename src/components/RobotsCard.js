@@ -45,7 +45,7 @@ export default function RobotsCard({ description, onChange: handleChange }) {
 
     if (runTimer) {
       // TODO  change to 10
-      setCountDownTrial(1);
+      setCountDownTrial(10);
       timerIdTrial = setInterval(() => {
         setCountDownTrial((countDown) => countDown - 1);
       }, 1000);
@@ -82,31 +82,17 @@ export default function RobotsCard({ description, onChange: handleChange }) {
           <Grid item xs={1}>
             <Typography> valence </Typography>
           </Grid>
-          <Grid item xs={2}>
-            <Card>
-              <img src={v1} alt="v1" className={classes.imageContainer} />
-            </Card>
-          </Grid>
-          <Grid item xs={2}>
-            <Card>
-              <img src={v2} alt="v2" className={classes.imageContainer} />
-            </Card>{' '}
-          </Grid>
-          <Grid item xs={2}>
-            <Card>
-              <img src={v3} alt="v3" className={classes.imageContainer} />
-            </Card>{' '}
-          </Grid>
-          <Grid item xs={2}>
-            <Card>
-              <img src={v4} alt="v4" className={classes.imageContainer} />
-            </Card>
-          </Grid>
-          <Grid item xs={2}>
-            <Card>
-              <img src={v5} alt="v5" className={classes.imageContainer} />
-            </Card>
-          </Grid>
+          {[v1, v2, v3, v4, v5].map((v, index) => (
+            <Grid key={`v${index + 1}`} item xs={2}>
+              <Card>
+                <img
+                  src={v}
+                  alt={`v${index + 1}`}
+                  className={classes.imageContainer}
+                />
+              </Card>
+            </Grid>
+          ))}
         </Grid>
         <Grid
           container
@@ -138,31 +124,17 @@ export default function RobotsCard({ description, onChange: handleChange }) {
           <Grid item xs={1}>
             <Typography> arousal </Typography>
           </Grid>
-          <Grid item xs={2}>
-            <Card>
-              <img src={a1} alt="a1" className={classes.imageContainer} />
-            </Card>
-          </Grid>
-          <Grid item xs={2}>
-            <Card>
-              <img src={a2} alt="a2" className={classes.imageContainer} />
-            </Card>
-          </Grid>
-          <Grid item xs={2}>
-            <Card>
-              <img src={a3} alt="a3" className={classes.imageContainer} />
-            </Card>
-          </Grid>
-          <Grid item xs={2}>
-            <Card>
-              <img src={a4} alt="a4" className={classes.imageContainer} />
-            </Card>
-          </Grid>
-          <Grid item xs={2}>
-            <Card>
-              <img src={a5} alt="a5" className={classes.imageContainer} />
-            </Card>
-          </Grid>
+          {[a1, a2, a3, a4, a5].map((a, index) => (
+            <Grid key={`a${index + 1}`} item xs={2}>
+              <Card>
+                <img
+                  src={a}
+                  alt={`a${index + 1}`}
+                  className={classes.imageContainer}
+                />
+              </Card>
+            </Grid>
+          ))}
         </Grid>
         <Grid
           container

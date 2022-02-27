@@ -44,8 +44,6 @@ function App() {
     },
   });
 
-  console.log('applyData: ', applyData);
-
   const stepsArray = [
     {
       id: 1,
@@ -67,7 +65,6 @@ function App() {
       component: (
         <PersonalInfoForm
           onClick={(data) => {
-            console.log({ ...registrationData, ...data });
             mutate({ ...registrationData, ...data });
           }}
         />

@@ -90,8 +90,7 @@ export default function PersonalInfoForm({ onClick: handleClick }) {
               name="age"
               type="number"
               size="small"
-              // TODO
-              //   inputProps={{ inputProps: { min: '5', max: 90 } }}
+              InputProps={{ inputProps: { min: 5, max: 90 } }}
             />
           </div>
           <div className={classes.textInputContainer}>
