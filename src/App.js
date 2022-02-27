@@ -11,24 +11,35 @@ import SecondLevel from './components/SecondLevel';
 import ThirdLevel from './components/ThirdLevel';
 import ThanksCard from './components/ThanksCard';
 
+import a1 from './assets/images/a1.png';
+import a2 from './assets/images/a2.png';
+import a3 from './assets/images/a3.png';
+import a4 from './assets/images/a4.png';
+import a5 from './assets/images/a5.png';
+
 import './App.css';
 
-const queryClient = new QueryClient();
-
 function App() {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(6);
   const [registrationData, setRegistrationData] = useState({});
+
+  const getImages = async () => {
+    const res = await axios.get('/images');
+    return res.data;
+  };
+  const { data: images, status } = useQuery('/images', getImages);
 
   const register = async (data) => {
     await axios.post('/register', data);
   };
-  //   const { mutate: create } = useMutation(createArtist, {
+
+  //   const { mutate: create } = useMutation(submitAnswer, {
   //     onSuccess: () => {
-  //       history.push('/artists');
-  //       alert.success({ text: 'هنرمند با موفقیت افزوده شد' });
+  //       setStep(8)
   //     },
   //     onError: (error) => {},
   //   });
+
   const { mutate } = useMutation(register, {
     onSuccess: () => {
       setStep(4);
@@ -78,16 +89,26 @@ function App() {
       id: 5,
       component: (
         <SecondLevel
-          onClick={(data) => {
+          isLoading={!status || status === 'loading'}
+          images={[a1, a2, a3, a4, a5, a1, a2, a3, a4, a5]}
+          onClick={(data, images) => {
+            console.log(images);
             setStep(7);
-            console.log('dadad:  ', data);
           }}
         />
       ),
     },
     {
       id: 6,
-      component: <ThirdLevel onClick={(data) => {}} />,
+      component: (
+        <ThirdLevel
+          images={[a1, a2, a3, a4, a5, a1, a2, a3, a4, a5]}
+          onClick={(data) => {
+            console.log(data);
+            setStep(7);
+          }}
+        />
+      ),
     },
     {
       id: 7,
@@ -96,6 +117,7 @@ function App() {
           buttonTitle="پایان آزمون"
           onClick={(data) => {
             console.log(data);
+            // TODO call mutate and set step on success
             setStep(8);
           }}
         />

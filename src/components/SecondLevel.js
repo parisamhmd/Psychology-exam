@@ -8,18 +8,14 @@ import Button from '@mui/material/Button';
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import AddIcon from '@mui/icons-material/Add';
-import { useQuery } from 'react-query';
-import axios from 'axios';
 
 import ShowImages from './ShowImages';
 
-import a1 from '../assets/images/a1.png';
-import a2 from '../assets/images/a2.png';
-import a3 from '../assets/images/a3.png';
-import a4 from '../assets/images/a4.png';
-import a5 from '../assets/images/a5.png';
-
-export default function ShowPictures({ onClick: handleClick }) {
+export default function ShowPictures({
+  images,
+  isLoading,
+  onClick: handleClick,
+}) {
   const [countDown, setCountDown] = React.useState(1);
   const [countDownTrial, setCountDownTrial] = React.useState(1);
   const [runTimer, setRunTimer] = React.useState(false);
@@ -74,15 +70,9 @@ export default function ShowPictures({ onClick: handleClick }) {
     }
   }, [countDownTrial, runTrialTimer]);
 
-  const getImages = async () => {
-    const res = await axios.get('/images');
-    return res.data;
-  };
-  const { data: images, status } = useQuery('/images', getImages);
-
   return (
     <div>
-      {status !== 'success' ? (
+      {isLoading ? (
         <Box sx={{ mt: 15 }}>
           <CircularProgress size={70} />
           <Typography variant="h4" sx={{ mt: 5 }}>
@@ -135,10 +125,7 @@ export default function ShowPictures({ onClick: handleClick }) {
               </CardContent>
             </Card>
           ) : (
-            <ShowImages
-              images={[a1, a2, a3, a4, a5, a1, a2, a3, a4, a5]}
-              onClick={handleClick}
-            />
+            <ShowImages images={images} onClick={handleClick} />
           )}
         </>
       )}

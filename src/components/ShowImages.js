@@ -85,11 +85,12 @@ export default function ShowImages({ images, onClick: handleClick }) {
     }
   }, [countDownIntervention, runInterventionTimer]);
 
-  React.useEffect(() => {
-    if (item > 9) {
-      //   setShow(undefined);
-    }
-  }, [item]);
+  //   TODO remove or use
+  //   React.useEffect(() => {
+  //     if (item > 9) {
+  //       //   setShow(undefined);
+  //     }
+  //   }, [item]);
 
   const renderTrial = () => (
     <div
@@ -101,9 +102,9 @@ export default function ShowImages({ images, onClick: handleClick }) {
         <>
           {/*  TODO save data with id of image   */}
           <img src={images[item]} className={classes.imageContainer} />
-          <Typography component="h6" variant="subtitle1">
+          <Typography component="h6" variant="subtitle1" sx={{ mt: 2 }}>
             countDownTrial: {countDownTrial}
-            به دقت نگاه کنید{' '}
+            به دقت به تصویر نگاه کنید{' '}
           </Typography>
         </>
       ) : show === 'robots_bofore' ? (
@@ -164,7 +165,7 @@ export default function ShowImages({ images, onClick: handleClick }) {
           <Button
             variant="contained"
             onClick={() => {
-              handleClick(data);
+              handleClick(data, images);
             }}
             sx={{ my: 5 }}
           >
