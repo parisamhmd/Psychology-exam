@@ -3,13 +3,12 @@ import * as React from 'react';
 
 import Box from '@mui/material/Box';
 import { Typography, Button } from '@mui/material';
-import Container from '@mui/material/Container';
 
 import ContentWrapper from '../assets/ContentWrapper';
 
 export default function WellComeCard({ onClick: handleClick }) {
   return (
-    <Container component="main" maxWidth="lg">
+    <div>
       <ContentWrapper>
         <Box>
           <Typography
@@ -32,6 +31,6 @@ export default function WellComeCard({ onClick: handleClick }) {
           </Button>
         </Box>
       </ContentWrapper>
-    </Container>
+    </div>
   );
 }

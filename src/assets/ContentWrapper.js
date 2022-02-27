@@ -2,6 +2,7 @@
 import React from 'react';
 
 import { makeStyles } from '@mui/styles';
+import Container from '@mui/material/Container';
 
 const useStyles = makeStyles({
   container: {
@@ -11,8 +12,17 @@ const useStyles = makeStyles({
     width: '100%',
   },
 });
-const ContentWrapper = ({ children }) => {
+const ContentWrapper = ({ component = 'main', maxWidth = 'md', children }) => {
   const classes = useStyles();
-  return <div className={classes.container}>{children}</div>;
+  return (
+    <Container
+      className={classes.container}
+      component={component}
+      maxWidth={maxWidth}
+      //   {...config}
+    >
+      {children}
+    </Container>
+  );
 };
 export default ContentWrapper;

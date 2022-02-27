@@ -4,6 +4,13 @@ import { useParams } from 'react-router-dom';
 import { useQuery, useMutation } from 'react-query';
 import axios from 'axios';
 
+import Button from '@mui/material/Button';
+import Dialog from '@mui/material/Dialog';
+import DialogActions from '@mui/material/DialogActions';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
+
 import WelcomeCard from './components/WelcomeCard';
 import LoginCard from './components/LoginCard';
 import PersonalInfoForm from './components/PersonalInfoForm';
@@ -17,9 +24,23 @@ import './App.css';
 function App() {
   const { link } = useParams();
 
-  const [step, setStep] = useState(5);
+  const [step, setStep] = useState(1);
   const [registrationData, setRegistrationData] = useState({});
   const [applyData, setApplyData] = useState({});
+  const [open, setOpen] = React.useState(false);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleAgree = () => {
+    setStep(4);
+    setOpen(false);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   const getImages = async () => {
     const res = await axios.get('/images');
@@ -40,7 +61,7 @@ function App() {
 
   const { mutate } = useMutation(register, {
     onSuccess: () => {
-      setStep(4);
+      handleClickOpen();
     },
   });
 
@@ -142,6 +163,28 @@ function App() {
   return (
     <div className="App">
       {stepsArray.map((item) => item.id === step && item.component)}
+      <Dialog
+        open={open}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {/* TODO change text */} شما قبلا به این آزمون پاسخ داده اید
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            {/* TODO change text */}. با ادامه دادن به آزمون، پاسخ شما به آژمون
+            قبلی پاک خواهد شد
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>انصراف</Button>
+          <Button onClick={handleAgree} autoFocus>
+            ادامه
+          </Button>
+        </DialogActions>
+      </Dialog>
     </div>
   );
 }

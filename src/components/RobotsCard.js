@@ -67,7 +67,7 @@ export default function RobotsCard({ description, onChange: handleChange }) {
   return (
     <Container component="main" maxWidth="xl">
       <ContentWrapper>
-        <Grid xs={11}>
+        <Grid container xs={11}>
           <Typography component="h6" variant="subtitle1" sx={{ mb: 3, mx: 2 }}>
             {description}
           </Typography>

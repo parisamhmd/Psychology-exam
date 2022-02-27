@@ -38,102 +38,100 @@ export default function PersonalInfoForm({ onClick: handleClick }) {
   };
 
   return (
-    <Container component="main" maxWidth="xs">
-      <ContentWrapper>
-        <Box
-          component="form"
-          onSubmit={handleSubmit}
-          sx={{
-            mt: 1,
-            display: 'flex',
-            flexDirection: 'column',
-            justifyContent: 'start',
-            alignItems: 'start',
-            gap: '1.5rem',
-          }}
-        >
-          <div className={classes.textInputContainer}>
-            <Typography component="h6" variant="subtitle1">
-              نام
-            </Typography>
-            <TextField
-              required
-              fullWidth
-              id="name"
-              name="name"
-              autoFocus
-              size="small"
-              inputProps={{ maxLength: 100 }}
-            />
-          </div>
-          <div className={classes.textInputContainer}>
-            <Typography component="h6" variant="subtitle1">
-              نام‌خانودگی
-            </Typography>
-            <TextField
-              required
-              fullWidth
-              id="family_name"
-              name="family_name"
-              size="small"
-              inputProps={{ maxLength: 100 }}
-            />
-          </div>
-          <div className={classes.textInputContainer}>
-            <Typography component="h6" variant="subtitle1">
-              سن
-            </Typography>
-            <TextField
-              required
-              fullWidth
-              id="age"
-              name="age"
-              type="number"
-              size="small"
-              InputProps={{ inputProps: { min: 5, max: 90 } }}
-            />
-          </div>
-          <div className={classes.textInputContainer}>
-            <Typography component="h6" variant="subtitle1">
-              جنسیت
-            </Typography>
-            <FormControl fullWidth>
-              <Select size="small" required fullWidth id="gender" name="gender">
-                <MenuItem value="female">زن</MenuItem>
-                <MenuItem value="male">مرد</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-          <div className={classes.textInputContainer}>
-            <Typography component="h6" variant="subtitle1">
-              سطح تحصیلات
-            </Typography>
-            <FormControl fullWidth>
-              <Select
-                size="small"
-                required
-                fullWidth
-                id="education_level"
-                name="education_level"
-              >
-                <MenuItem value="1">زیر دیپلم</MenuItem>
-                <MenuItem value="2">دیپلم</MenuItem>
-                <MenuItem value="3">کارشناسی</MenuItem>
-                <MenuItem value="4">کارشناسی ارشد</MenuItem>
-                <MenuItem value="5">دکترا و بالاتر</MenuItem>
-              </Select>
-            </FormControl>
-          </div>
-          <Button
-            type="submit"
+    <ContentWrapper component="main" maxWidth="xs">
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        sx={{
+          mt: 1,
+          display: 'flex',
+          flexDirection: 'column',
+          justifyContent: 'start',
+          alignItems: 'start',
+          gap: '1rem',
+        }}
+      >
+        <div className={classes.textInputContainer}>
+          <Typography component="h6" variant="subtitle1">
+            نام
+          </Typography>
+          <TextField
+            required
             fullWidth
-            variant="contained"
-            sx={{ mt: 3, mb: 2 }}
-          >
-            ورود به مرحله اول آزمون{' '}
-          </Button>
-        </Box>
-      </ContentWrapper>
-    </Container>
+            id="name"
+            name="name"
+            autoFocus
+            size="small"
+            inputProps={{ maxLength: 100 }}
+          />
+        </div>
+        <div className={classes.textInputContainer}>
+          <Typography component="h6" variant="subtitle1">
+            نام‌خانودگی
+          </Typography>
+          <TextField
+            required
+            fullWidth
+            id="family_name"
+            name="family_name"
+            size="small"
+            inputProps={{ maxLength: 100 }}
+          />
+        </div>
+        <div className={classes.textInputContainer}>
+          <Typography component="h6" variant="subtitle1">
+            سن
+          </Typography>
+          <TextField
+            required
+            fullWidth
+            id="age"
+            name="age"
+            type="number"
+            size="small"
+            InputProps={{ inputProps: { min: 5, max: 90 } }}
+          />
+        </div>
+        <div className={classes.textInputContainer}>
+          <Typography component="h6" variant="subtitle1">
+            جنسیت
+          </Typography>
+          <FormControl fullWidth>
+            <Select size="small" required fullWidth id="gender" name="gender">
+              <MenuItem value="female">زن</MenuItem>
+              <MenuItem value="male">مرد</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+        <div className={classes.textInputContainer}>
+          <Typography component="h6" variant="subtitle1">
+            سطح تحصیلات
+          </Typography>
+          <FormControl fullWidth>
+            <Select
+              size="small"
+              required
+              fullWidth
+              id="education_level"
+              name="education_level"
+            >
+              <MenuItem value="1">زیر دیپلم</MenuItem>
+              <MenuItem value="2">دیپلم</MenuItem>
+              <MenuItem value="3">کارشناسی</MenuItem>
+              <MenuItem value="4">کارشناسی ارشد</MenuItem>
+              <MenuItem value="5">دکترا و بالاتر</MenuItem>
+            </Select>
+          </FormControl>
+        </div>
+        <Button
+          type="submit"
+          fullWidth
+          variant="contained"
+          sx={{ mt: 2, mb: 1 }}
+        >
+          ورود به مرحله اول آزمون{' '}
+        </Button>
+      </Box>
+    </ContentWrapper>
   );
 }
