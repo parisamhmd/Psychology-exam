@@ -1,9 +1,6 @@
 /* eslint-disable react/prop-types */
 import React, { useState } from 'react';
 
-import { useQuery, useMutation } from 'react-query';
-import axios from 'axios';
-
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -23,6 +20,7 @@ export default function ThirdLevel({ images, onClick: handleClick }) {
 
   const [item, setItem] = useState(0);
   const [data, setData] = useState({});
+  const [finalData, setFinalData] = useState({});
   const [start] = useState(new Date().getTime());
 
   return (
@@ -44,6 +42,10 @@ export default function ThirdLevel({ images, onClick: handleClick }) {
               const end = new Date().getTime();
               if (item === 0) setData({ [item]: end - start });
               else setData({ ...data, [item]: end - data[item - 1] - start });
+              setFinalData({
+                ...finalData,
+                [images[item].id]: `${data[item]}ss${item}`,
+              });
               setItem((item) => (item = item + 1));
             }}
           >
@@ -58,8 +60,7 @@ export default function ThirdLevel({ images, onClick: handleClick }) {
           <Button
             variant="contained"
             onClick={() => {
-              // TODO handle id
-              handleClick(data);
+              handleClick(finalData);
             }}
             sx={{ my: 5 }}
           >

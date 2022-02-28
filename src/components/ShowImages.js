@@ -45,8 +45,7 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
     let timerIdTrial;
 
     if (runTimer) {
-      // TODO 5ms
-      setCountDownTrial(1);
+      setCountDownTrial(5);
       timerIdTrial = setInterval(() => {
         setCountDownTrial((countDown) => countDown - 1);
       }, 1000);
@@ -70,8 +69,7 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
     let timerIdIntervention;
 
     if (runInterventionTimer) {
-      // TODO 30ms
-      setCountDownIntervention(3);
+      setCountDownIntervention(30);
       timerIdIntervention = setInterval(() => {
         setCountDownIntervention((countDown) => countDown - 1);
       }, 1000);
@@ -95,7 +93,6 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
     let timerIdBreak;
 
     if (runBreakTimer) {
-      // TODO 60ms
       setCountDownBreak(60);
       timerIdBreak = setInterval(() => {
         setCountDownBreak((countDown) => countDown - 1);
@@ -202,7 +199,7 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
           <Button
             variant="contained"
             onClick={() => {
-              handleClick(data, images);
+              handleClick(data);
             }}
             sx={{ my: 5 }}
           >

@@ -113,6 +113,7 @@ export default function BasicTable({ buttonTitle, onClick: handleClick }) {
                 {[3, 2, 1, 0].map((i) => (
                   <TableCell key={i} align="center" padding="none">
                     <Radio
+                      disableRipple={true}
                       checked={selectedValue[row.id] === i}
                       onChange={(e) => handleChange(e, row.id)}
                       value={i}

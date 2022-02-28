@@ -54,21 +54,12 @@ function App() {
   };
   const { data: images, status } = useQuery('/images', getImages);
 
-  const register = async (data) => {
+  const handleRegister = async (data) => {
     const res = await axios.post('/register', data);
     return res.data;
   };
 
-  //   const { mutate: create } = useMutation(submitAnswer, {
-  //     onSuccess: () => {
-  //   localStorage.removeItem('applyData');
-  //   localStorage.setItem('step', 8);
-  //       setStep(8)
-  //     },
-  //     onError: (error) => {},
-  //   });
-
-  const { mutate } = useMutation(register, {
+  const { mutate: register } = useMutation(handleRegister, {
     onSuccess: (data) => {
       localStorage.setItem('id', data.id);
       if (data.have_test) handleClickOpen();
@@ -79,6 +70,23 @@ function App() {
     onError: (error) => {
       // TODO handle error modal all over project
       console.log(error.response.data);
+    },
+  });
+
+  const submitAnswer = async (data) => {
+    const res = await axios.post('/apply', data);
+    return res.data;
+  };
+
+  const { mutate: apply } = useMutation(submitAnswer, {
+    onSuccess: () => {
+      localStorage.removeItem('applyData');
+      localStorage.setItem('step', 8);
+      localStorage.setItem('id', 8);
+      setStep(8);
+    },
+    onError: (error) => {
+      // TODO handle error
     },
   });
 
@@ -111,7 +119,7 @@ function App() {
       component: (
         <PersonalInfoForm
           onClick={(data) => {
-            mutate({ ...registrationData, ...data });
+            register({ ...registrationData, ...data });
           }}
         />
       ),
@@ -143,7 +151,7 @@ function App() {
           onClick={(data) => {
             setApplyData({
               ...applyData,
-              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => ({
+              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
                 image: item,
                 ...data[item],
               })),
@@ -152,7 +160,7 @@ function App() {
               'applyData',
               JSON.stringify({
                 ...applyData,
-                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => ({
+                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
                   image: item,
                   ...data[item],
                 })),
@@ -178,9 +186,10 @@ function App() {
           <ThirdLevel
             images={images}
             onClick={(data) => {
+              console.log('fdf', data);
               setApplyData({
                 ...applyData,
-                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => ({
+                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
                   reaction_time: data[item],
                   ...applyData.image_actions[item],
                 })),
@@ -189,10 +198,12 @@ function App() {
                 'applyData',
                 JSON.stringify({
                   ...applyData,
-                  image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => ({
-                    reaction_time: data[item],
-                    ...applyData.image_actions[item],
-                  })),
+                  image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(
+                    (item) => ({
+                      reaction_time: data[item],
+                      ...applyData.image_actions[item],
+                    })
+                  ),
                 })
               );
               localStorage.setItem('step', 7);
@@ -208,13 +219,8 @@ function App() {
           buttonTitle="پایان آزمون"
           onClick={(data) => {
             setApplyData({ ...applyData, BMIS_after: data });
-            localStorage.setItem(
-              'applyData',
-              JSON.stringify({ ...applyData, BMIS_after: data })
-            );
+            console.log('applyData', applyData);
             // TODO call mutate and set step on success
-            localStorage.setItem('step', 8);
-            setStep(8);
           }}
         />
       ),

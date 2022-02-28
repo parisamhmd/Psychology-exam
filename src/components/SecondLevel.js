@@ -118,7 +118,7 @@ export default function ShowPictures({
                 mt: 9,
               }}
             >
-              <CardContent sx={{}}>
+              <CardContent>
                 <AddIcon
                   fontSize="large"
                   style={{ color: 'white', fontSize: '4rem' }}

@@ -44,8 +44,7 @@ export default function RobotsCard({ description, onChange: handleChange }) {
     let timerIdTrial;
 
     if (runTimer) {
-      // TODO  change to 10
-      setCountDownTrial(1);
+      setCountDownTrial(10);
       timerIdTrial = setInterval(() => {
         setCountDownTrial((countDown) => countDown - 1);
       }, 1000);
@@ -102,9 +101,10 @@ export default function RobotsCard({ description, onChange: handleChange }) {
         flexDirection="row-reverse"
       >
         <Grid item xs={4}></Grid>
-        {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
           <Grid item key={i} xs={2} justifyContent="flex-start">
             <Radio
+              disableRipple
               checked={valence === i}
               onChange={() => setValence(i)}
               value={i}
@@ -144,9 +144,10 @@ export default function RobotsCard({ description, onChange: handleChange }) {
         flexDirection="row-reverse"
       >
         <Grid item xs={4}></Grid>
-        {[0, 1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
+        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
           <Grid item key={i} xs={2} justifyContent="flex-start">
             <Radio
+              disableRipple
               checked={arousal === i}
               onChange={() => setArousal(i)}
               value={i}
