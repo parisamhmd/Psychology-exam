@@ -24,7 +24,7 @@ import './App.css';
 function App() {
   const { link } = useParams();
 
-  const [step, setStep] = useState(5);
+  const [step, setStep] = useState(4);
   const [registrationData, setRegistrationData] = useState({});
   const [applyData, setApplyData] = useState({});
   const [open, setOpen] = React.useState(false);

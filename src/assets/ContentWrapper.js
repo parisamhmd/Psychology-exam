@@ -10,6 +10,7 @@ const useStyles = makeStyles({
     boxShadow: '0px 0px 20px 5px #d8dde2',
     padding: '3rem',
     width: '100%',
+    marginBottom: '3rem',
   },
 });
 const ContentWrapper = ({ component = 'main', maxWidth = 'md', children }) => {
@@ -19,7 +20,6 @@ const ContentWrapper = ({ component = 'main', maxWidth = 'md', children }) => {
       className={classes.container}
       component={component}
       maxWidth={maxWidth}
-      //   {...config}
     >
       {children}
     </Container>

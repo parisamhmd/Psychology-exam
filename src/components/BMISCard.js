@@ -63,6 +63,8 @@ export default function BasicTable({ buttonTitle, onClick: handleClick }) {
     setSelectedValue({ ...selectedValue, [id]: +event.target.value });
   };
 
+  console.log();
+
   return (
     <ContentWrapper component="main" maxWidth="md">
       <Box
@@ -76,6 +78,14 @@ export default function BasicTable({ buttonTitle, onClick: handleClick }) {
       >
         <Typography component="h6" variant="h5" sx={{ mb: 1 }}>
           در این مرحله به مقیاس کوتاه درون‌نگری خلق پاسخ می‌دهید.
+          <Typography
+            component="span"
+            variant="subtitle1"
+            color="error"
+            sx={{ mt: 1 }}
+          >
+            (تمام فیلدها اجباریست){' '}
+          </Typography>
         </Typography>
         <Typography component="h6" variant="subtitle1" sx={{ mb: 4 }}>
           هر کدام از صفت های زیر چقدر در مورد خلق شما صدق می‌کند؟ لطفاً علامت
@@ -119,6 +129,7 @@ export default function BasicTable({ buttonTitle, onClick: handleClick }) {
         type="submit"
         variant="contained"
         sx={{ mt: 4 }}
+        disabled={!Object.values(selectedValue).every((i) => !!i)}
         onClick={() => handleClick(selectedValue)}
       >
         {buttonTitle}
