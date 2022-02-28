@@ -8,8 +8,6 @@ import { makeStyles } from '@mui/styles';
 import RobotsCard from './RobotsCard';
 import ContentWrapper from '../assets/ContentWrapper';
 
-import relaxImage from '../assets/images/relax.jpg';
-
 const useStyles = makeStyles({
   imageContainer: {
     width: '28rem',

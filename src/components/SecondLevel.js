@@ -11,7 +11,7 @@ import AddIcon from '@mui/icons-material/Add';
 
 import ShowImages from './ShowImages';
 
-export default function ShowPictures({
+export default function SecondLevel({
   type,
   images,
   isLoading,

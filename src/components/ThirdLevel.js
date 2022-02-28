@@ -40,12 +40,19 @@ export default function ThirdLevel({ images, onClick: handleClick }) {
             variant="contained"
             onClick={() => {
               const end = new Date().getTime();
-              if (item === 0) setData({ [item]: end - start });
-              else setData({ ...data, [item]: end - data[item - 1] - start });
-              setFinalData({
-                ...finalData,
-                [images[item].id]: `${data[item]}ss${item}`,
-              });
+              if (item === 0) {
+                setData({ [item]: end - start });
+                setFinalData({
+                  ...finalData,
+                  [images[item].id]: end - start,
+                });
+              } else {
+                setData({ ...data, [item]: end - data[item - 1] - start });
+                setFinalData({
+                  ...finalData,
+                  [images[item].id]: end - data[item - 1] - start,
+                });
+              }
               setItem((item) => (item = item + 1));
             }}
           >

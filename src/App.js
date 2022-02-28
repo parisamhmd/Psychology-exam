@@ -33,6 +33,8 @@ function App() {
     JSON.parse(localStorage.getItem('applyData')) || {}
   );
   const [open, setOpen] = React.useState(false);
+  const [openErrorModal, setOpenErrorModal] = React.useState(false);
+  const [error, setError] = React.useState('');
 
   const handleClickOpen = () => {
     setOpen(true);
@@ -68,8 +70,8 @@ function App() {
       }
     },
     onError: (error) => {
-      // TODO handle error modal all over project
-      console.log(error.response.data);
+      setError(error.response.data);
+      setOpenErrorModal(true);
     },
   });
 
@@ -86,7 +88,12 @@ function App() {
       setStep(8);
     },
     onError: (error) => {
-      // TODO handle error
+      //   console
+      //     .log
+      // Object.keys(error.response.data).map((err) => error.response.data[err])
+      // ();
+      setError(error);
+      setOpenErrorModal(true);
     },
   });
 
@@ -219,8 +226,12 @@ function App() {
           buttonTitle="پایان آزمون"
           onClick={(data) => {
             setApplyData({ ...applyData, BMIS_after: data });
-            console.log('applyData', applyData);
-            // TODO call mutate and set step on success
+            apply({
+              ...applyData,
+              BMIS_after: data,
+              kind: link,
+              participant: localStorage.getItem('id'),
+            });
           }}
         />
       ),
@@ -254,6 +265,18 @@ function App() {
             ادامه
           </Button>
         </DialogActions>
+      </Dialog>
+      <Dialog
+        open={openErrorModal}
+        onClose={() => setOpenErrorModal(false)}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+            خظا در ارسال اطلاعات
+          </DialogContentText>
+        </DialogContent>
       </Dialog>
     </div>
   );
