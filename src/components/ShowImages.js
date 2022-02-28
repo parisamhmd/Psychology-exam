@@ -8,10 +8,12 @@ import { makeStyles } from '@mui/styles';
 import RobotsCard from './RobotsCard';
 import ContentWrapper from '../assets/ContentWrapper';
 
+import relaxImage from '../assets/images/relax.jpg';
+
 const useStyles = makeStyles({
   imageContainer: {
-    width: '18rem',
-    height: '20rem',
+    width: '28rem',
+    height: '29rem',
   },
 });
 
@@ -25,6 +27,10 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
   //   Intervention
   const [countDownIntervention, setCountDownIntervention] = React.useState(1);
   const [runInterventionTimer, setRunInterventionTimer] = React.useState(false);
+
+  //   Break
+  const [countDownBreak, setCountDownBreak] = React.useState(1);
+  const [runBreakTimer, setRunBreakTimer] = React.useState(false);
 
   const [show, setShow] = React.useState('images');
   const [data, setData] = React.useState({});
@@ -65,7 +71,7 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
 
     if (runInterventionTimer) {
       // TODO 30ms
-      setCountDownIntervention(1);
+      setCountDownIntervention(3);
       timerIdIntervention = setInterval(() => {
         setCountDownIntervention((countDown) => countDown - 1);
       }, 1000);
@@ -84,12 +90,31 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
     }
   }, [countDownIntervention, runInterventionTimer]);
 
-  //   TODO remove or use
-  //   React.useEffect(() => {
-  //     if (item > 9) {
-  //       //   setShow(undefined);
-  //     }
-  //   }, [item]);
+  //   Break
+  React.useEffect(() => {
+    let timerIdBreak;
+
+    if (runBreakTimer) {
+      // TODO 60ms
+      setCountDownBreak(60);
+      timerIdBreak = setInterval(() => {
+        setCountDownBreak((countDown) => countDown - 1);
+      }, 1000);
+    } else {
+      clearInterval(timerIdBreak);
+    }
+
+    return () => clearInterval(timerIdBreak);
+  }, [runBreakTimer]);
+
+  React.useEffect(() => {
+    if (countDownBreak < 1 && runBreakTimer) {
+      setRunBreakTimer(false);
+      setCountDownBreak(1);
+      setShow('images');
+      setRunTimer(true);
+    }
+  }, [countDownBreak, runBreakTimer]);
 
   const renderTrial = () => (
     <div
@@ -100,8 +125,8 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
       {show === 'images' ? (
         <>
           <img src={images[item]?.picture} className={classes.imageContainer} />
-          <Typography component="h6" variant="subtitle1" sx={{ mt: 2 }}>
-            به دقت به تصویر نگاه کنید{' '}
+          <Typography component="h6" variant="h6" sx={{ mt: 2 }}>
+            به دقت به تصویر نگاه کنید
           </Typography>
         </>
       ) : show === 'robots_bofore' ? (
@@ -149,10 +174,19 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
               },
             });
             setItem((item) => item + 1);
-            setShow('images');
-            setRunTimer(true);
+            setShow(item === 4 ? 'break' : 'images');
+            item === 4 ? setRunBreakTimer(true) : setRunTimer(true);
           }}
         />
+      ) : show === 'break' ? (
+        <>
+          <Typography component="h6" variant="h4" sx={{ mt: 7 }}>
+            یک دقیقه استراحت کنید
+          </Typography>
+          <Typography component="h6" variant="h4" sx={{ mt: 2 }}>
+            {countDownBreak}
+          </Typography>
+        </>
       ) : null}
     </div>
   );
@@ -174,7 +208,7 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
           >
             ورود به مرحلۀ سوم آزمون
           </Button>
-          <Typography component="h6" variant="subtitle1">
+          <Typography component="h6" variant="h6">
             در این مرحله ده تصویر قبل را مشاهده خواهید کرد. لطفاً طبق دستورالعمل
             زیر هر تصویر عمل کنید.
           </Typography>

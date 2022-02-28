@@ -10,8 +10,8 @@ import ContentWrapper from '../assets/ContentWrapper';
 
 const useStyles = makeStyles({
   imageContainer: {
-    width: '18rem',
-    height: '20rem',
+    width: '28rem',
+    height: '29rem',
   },
 });
 
@@ -28,7 +28,7 @@ export default function ThirdLevel({ images, onClick: handleClick }) {
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',
-        mt: 7,
+        mt: 2,
         gap: 3,
       }}
     >
