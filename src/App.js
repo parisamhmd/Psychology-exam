@@ -10,6 +10,9 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
+import CircularProgress from '@mui/material/CircularProgress';
+import Box from '@mui/material/Box';
+import Typography from '@mui/material/Typography';
 
 import WelcomeCard from './components/WelcomeCard';
 import LoginCard from './components/LoginCard';
@@ -24,9 +27,11 @@ import './App.css';
 function App() {
   const { link } = useParams();
 
-  const [step, setStep] = useState(4);
+  const [step, setStep] = useState(+localStorage.getItem('step') || 1);
   const [registrationData, setRegistrationData] = useState({});
-  const [applyData, setApplyData] = useState({});
+  const [applyData, setApplyData] = useState(
+    JSON.parse(localStorage.getItem('applyData')) || {}
+  );
   const [open, setOpen] = React.useState(false);
 
   const handleClickOpen = () => {
@@ -35,6 +40,7 @@ function App() {
 
   const handleAgree = () => {
     setStep(4);
+    localStorage.setItem('step', 4);
     setOpen(false);
   };
 
@@ -49,26 +55,44 @@ function App() {
   const { data: images, status } = useQuery('/images', getImages);
 
   const register = async (data) => {
-    await axios.post('/register', data);
+    const res = await axios.post('/register', data);
+    return res.data;
   };
 
   //   const { mutate: create } = useMutation(submitAnswer, {
   //     onSuccess: () => {
+  //   localStorage.removeItem('applyData');
+  //   localStorage.setItem('step', 8);
   //       setStep(8)
   //     },
   //     onError: (error) => {},
   //   });
 
   const { mutate } = useMutation(register, {
-    onSuccess: () => {
-      handleClickOpen();
+    onSuccess: (data) => {
+      localStorage.setItem('id', data.id);
+      if (data.have_test) handleClickOpen();
+      else {
+        setStep(4), localStorage.setItem('step', 4);
+      }
+    },
+    onError: (error) => {
+      // TODO handle error modal all over project
+      console.log(error.response.data);
     },
   });
 
   const stepsArray = [
     {
       id: 1,
-      component: <WelcomeCard onClick={() => setStep(2)} />,
+      component: (
+        <WelcomeCard
+          onClick={() => {
+            localStorage.setItem('step', 2);
+            setStep(2);
+          }}
+        />
+      ),
     },
     {
       id: 2,
@@ -76,6 +100,7 @@ function App() {
         <LoginCard
           onClick={(data) => {
             setRegistrationData(data);
+            localStorage.setItem('step', 2);
             setStep(3);
           }}
         />
@@ -98,6 +123,11 @@ function App() {
           buttonTitle="پایان مرحلۀ اول آزمون"
           onClick={(data) => {
             setApplyData({ ...applyData, BMIS_before: data });
+            localStorage.setItem(
+              'applyData',
+              JSON.stringify({ ...applyData, BMIS_before: data })
+            );
+            localStorage.setItem('step', 5);
             setStep(5);
           }}
         />
@@ -118,6 +148,17 @@ function App() {
                 ...data[item],
               })),
             });
+            localStorage.setItem(
+              'applyData',
+              JSON.stringify({
+                ...applyData,
+                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => ({
+                  image: item,
+                  ...data[item],
+                })),
+              })
+            );
+            localStorage.setItem('step', 6);
             setStep(6);
           }}
         />
@@ -125,21 +166,40 @@ function App() {
     },
     {
       id: 6,
-      component: (
-        <ThirdLevel
-          images={images}
-          onClick={(data) => {
-            setApplyData({
-              ...applyData,
-              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => ({
-                reaction_time: data[item],
-                ...applyData.image_actions[item],
-              })),
-            });
-            setStep(7);
-          }}
-        />
-      ),
+      component:
+        !status || status === 'loading' ? (
+          <Box sx={{ mt: 15 }}>
+            <CircularProgress size={70} />
+            <Typography variant="h4" sx={{ mt: 5 }}>
+              در حال بارگیری تصاویر آزمون
+            </Typography>
+          </Box>
+        ) : (
+          <ThirdLevel
+            images={images}
+            onClick={(data) => {
+              setApplyData({
+                ...applyData,
+                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => ({
+                  reaction_time: data[item],
+                  ...applyData.image_actions[item],
+                })),
+              });
+              localStorage.setItem(
+                'applyData',
+                JSON.stringify({
+                  ...applyData,
+                  image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9].map((item) => ({
+                    reaction_time: data[item],
+                    ...applyData.image_actions[item],
+                  })),
+                })
+              );
+              localStorage.setItem('step', 7);
+              setStep(7);
+            }}
+          />
+        ),
     },
     {
       id: 7,
@@ -148,7 +208,12 @@ function App() {
           buttonTitle="پایان آزمون"
           onClick={(data) => {
             setApplyData({ ...applyData, BMIS_after: data });
+            localStorage.setItem(
+              'applyData',
+              JSON.stringify({ ...applyData, BMIS_after: data })
+            );
             // TODO call mutate and set step on success
+            localStorage.setItem('step', 8);
             setStep(8);
           }}
         />
@@ -170,12 +235,11 @@ function App() {
         aria-describedby="alert-dialog-description"
       >
         <DialogTitle id="alert-dialog-title">
-          {/* TODO change text */} شما قبلا به این آزمون پاسخ داده اید
+          شما قبلا به این آزمون پاسخ داده اید
         </DialogTitle>
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            {/* TODO change text */}. با ادامه دادن به آزمون، پاسخ شما به آژمون
-            قبلی پاک خواهد شد
+            با ادامه دادن به آزمون، پاسخ شما به آزمون قبلی پاک خواهد شد
           </DialogContentText>
         </DialogContent>
         <DialogActions>
