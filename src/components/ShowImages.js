@@ -67,8 +67,7 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
     let timerIdIntervention;
 
     if (runInterventionTimer) {
-      // TODO 30
-      setCountDownIntervention(3);
+      setCountDownIntervention(30);
       timerIdIntervention = setInterval(() => {
         setCountDownIntervention((countDown) => countDown - 1);
       }, 1000);
@@ -92,8 +91,7 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
     let timerIdBreak;
 
     if (runBreakTimer) {
-      // TODO
-      setCountDownBreak(6);
+      setCountDownBreak(60);
       timerIdBreak = setInterval(() => {
         setCountDownBreak((countDown) => countDown - 1);
       }, 1000);
@@ -150,7 +148,7 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
           <Typography component="h6" variant="h6" sx={{ mt: 2 }}>
             {type === 'see' && 'به تصویر نگاه کنید'}
             {type === 'description' && 'صحنه را توصیف کنید'}
-            {type === 'speak' && 'در مورد موضوع دیگری صحبت کنید'}
+            {type === 'speak' && 'نام جسمی درون اتاق را تکرار کنید'}
             {type === 'repeat' &&
               'هیجان غالب خود را تکرار کنید به دقت نگاه کنید'}
           </Typography>
@@ -205,11 +203,18 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
           >
             ورود به مرحلۀ سوم آزمون
           </Button>
-          <Typography variant="subtitle1">
+          <Typography variant="h5">
             در این مرحله ده تصویر قبل را مشاهده خواهید کرد. لطفاً طبق دستورالعمل
-            زیر هر تصویر عمل کنید. لطفاً تا زمانی که تحمل تماشای تصویر را دارید
-            آن را نگاه کنید. در غیر این صورت با انتخاب دگمۀ کافی به مرحلۀ بعد
-            بروید.
+            زیر هر تصویر عمل کنید.
+          </Typography>
+          <Typography variant="subtitle1" sx={{ mt: 2 }}>
+            برای تصاویر مثبت: عکس مثبت هست. توضیح زیرش: لطفاً تا زمانی که علاقه
+            دارید به تصویر نگاه کنید. در غیر این صورت با انتخاب دگمۀ کافی به
+            مرحلۀ بعد بروید.
+          </Typography>
+          <Typography variant="subtitle1" sx={{ mt: 2 }}>
+            برای تصاویر منفی: لطفاً تا زمانی که تحمل تماشای تصویر را دارید آن را
+            نگاه کنید. در غیر این صورت با انتخاب دگمۀ کافی به مرحلۀ بعد بروید.{' '}
           </Typography>
         </ContentWrapper>
       )}

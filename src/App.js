@@ -87,11 +87,7 @@ function App() {
       setStep(8);
     },
     onError: (error) => {
-      //   console
-      //     .log
-      // Object.keys(error.response.data).map((err) => error.response.data[err])
-      // ();
-      setError(error);
+      setError(error.response.data);
       setOpenErrorModal(true);
     },
   });
@@ -273,7 +269,9 @@ function App() {
       >
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
-            خظا در ارسال اطلاعات
+            <Typography variant="h5" color="error">
+              خظا در ارسال اطلاعات
+            </Typography>
           </DialogContentText>
         </DialogContent>
       </Dialog>
