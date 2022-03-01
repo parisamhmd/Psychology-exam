@@ -3,7 +3,6 @@ import { useState, useEffect } from 'react';
 
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
-import Container from '@mui/material/Container';
 import { makeStyles } from '@mui/styles';
 import Typography from '@mui/material/Typography';
 import Radio from '@mui/material/Radio';
@@ -62,6 +61,16 @@ export default function RobotsCard({ description, onChange: handleChange }) {
       handleChange(valence, arousal);
     }
   }, [countDownTrial, runTimer]);
+
+  useEffect(() => {
+    if (arousal && arousal) {
+      setRunTimer(false);
+      setCountDownTrial(1);
+      setTimeout(function () {
+        handleChange(valence, arousal);
+      }, 150);
+    }
+  }, [valence, arousal]);
 
   return (
     <ContentWrapper component="main" maxWidth="xl">

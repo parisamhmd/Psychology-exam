@@ -67,7 +67,8 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
     let timerIdIntervention;
 
     if (runInterventionTimer) {
-      setCountDownIntervention(30);
+      // TODO 30
+      setCountDownIntervention(3);
       timerIdIntervention = setInterval(() => {
         setCountDownIntervention((countDown) => countDown - 1);
       }, 1000);
@@ -91,7 +92,8 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
     let timerIdBreak;
 
     if (runBreakTimer) {
-      setCountDownBreak(60);
+      // TODO
+      setCountDownBreak(6);
       timerIdBreak = setInterval(() => {
         setCountDownBreak((countDown) => countDown - 1);
       }, 1000);
@@ -203,17 +205,11 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
           >
             ورود به مرحلۀ سوم آزمون
           </Button>
-          <Typography component="h6" variant="h6">
+          <Typography variant="subtitle1">
             در این مرحله ده تصویر قبل را مشاهده خواهید کرد. لطفاً طبق دستورالعمل
-            زیر هر تصویر عمل کنید.
-          </Typography>
-          <Typography component="h6" variant="subtitle2" sx={{ mt: 3 }}>
-            برای تصاویر مثبت: لطفاً تا زمانی که علاقه دارید به تصویر نگاه کنید.
-            در غیر این صورت با انتخاب دگمۀ کافی به مرحلۀ بعد بروید.
-          </Typography>
-          <Typography component="h6" variant="subtitle2" sx={{ mt: 3 }}>
-            برای تصاویر منفی: لطفاً تا زمانی که تحمل تماشای تصویر را دارید آن را
-            نگاه کنید. در غیر این صورت با انتخاب دگمۀ کافی به مرحلۀ بعد بروید.
+            زیر هر تصویر عمل کنید. لطفاً تا زمانی که تحمل تماشای تصویر را دارید
+            آن را نگاه کنید. در غیر این صورت با انتخاب دگمۀ کافی به مرحلۀ بعد
+            بروید.
           </Typography>
         </ContentWrapper>
       )}

@@ -84,7 +84,6 @@ function App() {
     onSuccess: () => {
       localStorage.removeItem('applyData');
       localStorage.setItem('step', 8);
-      localStorage.setItem('id', 8);
       setStep(8);
     },
     onError: (error) => {
@@ -193,14 +192,14 @@ function App() {
           <ThirdLevel
             images={images}
             onClick={(data) => {
-              console.log('fdf', data);
               setApplyData({
                 ...applyData,
                 image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
                   reaction_time: data[item],
-                  ...applyData.image_actions[item],
+                  ...applyData.image_actions[item - 1],
                 })),
               });
+
               localStorage.setItem(
                 'applyData',
                 JSON.stringify({
@@ -208,7 +207,7 @@ function App() {
                   image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(
                     (item) => ({
                       reaction_time: data[item],
-                      ...applyData.image_actions[item],
+                      ...applyData.image_actions[item - 1],
                     })
                   ),
                 })
