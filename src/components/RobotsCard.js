@@ -74,8 +74,8 @@ export default function RobotsCard({ description, onChange: handleChange }) {
 
   return (
     <ContentWrapper component="main" maxWidth="xl">
-      <Grid container xs={11}>
-        <Typography component="h6" variant="subtitle1" sx={{ mb: 3, mx: 2 }}>
+      <Grid container xs={12}>
+        <Typography component="h6" variant="subtitle2" sx={{ mb: 3 }}>
           {description}
         </Typography>
       </Grid>
@@ -86,11 +86,8 @@ export default function RobotsCard({ description, onChange: handleChange }) {
         alignItems="center"
         flexDirection="row-reverse"
       >
-        <Grid item xs={1}>
-          <Typography> valence </Typography>
-        </Grid>
         {[v1, v2, v3, v4, v5].map((v, index) => (
-          <Grid key={`v${index + 1}`} item xs={2}>
+          <Grid key={`v${index + 1}`} item xs={3}>
             <Card>
               <img
                 src={v}
@@ -103,15 +100,15 @@ export default function RobotsCard({ description, onChange: handleChange }) {
       </Grid>
       <Grid
         container
-        sx={{ mr: 3.5 }}
+        sx={{ mr: 4.75 }}
         wrap="nowrap"
         alignItems="center"
         justifyContent="space-between"
         flexDirection="row-reverse"
       >
-        <Grid item xs={4}></Grid>
+        <Grid item xs={1}></Grid>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-          <Grid item key={i} xs={2} justifyContent="flex-start">
+          <Grid item key={i} xs={1}>
             <Radio
               disableRipple
               checked={valence === i}
@@ -119,21 +116,19 @@ export default function RobotsCard({ description, onChange: handleChange }) {
               value={i}
               name="radio-buttons"
             />
+            {i}
           </Grid>
         ))}
       </Grid>
       <Grid
         container
-        sx={{ gap: 3, mt: 4 }}
+        sx={{ gap: 2, mt: 4 }}
         wrap="nowrap"
         alignItems="center"
         flexDirection="row-reverse"
       >
-        <Grid item xs={1}>
-          <Typography> arousal </Typography>
-        </Grid>
         {[a1, a2, a3, a4, a5].map((a, index) => (
-          <Grid key={`a${index + 1}`} item xs={2}>
+          <Grid key={`a${index + 1}`} item xs={3}>
             <Card>
               <img
                 src={a}
@@ -146,15 +141,15 @@ export default function RobotsCard({ description, onChange: handleChange }) {
       </Grid>
       <Grid
         container
-        sx={{ mr: 3.5 }}
+        sx={{ mr: 4.75 }}
         wrap="nowrap"
         alignItems="center"
         justifyContent="space-between"
         flexDirection="row-reverse"
       >
-        <Grid item xs={4}></Grid>
+        <Grid item xs={1}></Grid>
         {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-          <Grid item key={i} xs={2} justifyContent="flex-start">
+          <Grid item key={i} xs={1} justifyContent="flex-start">
             <Radio
               disableRipple
               checked={arousal === i}
@@ -162,6 +157,7 @@ export default function RobotsCard({ description, onChange: handleChange }) {
               value={i}
               name="radio-buttons"
             />
+            {i}
           </Grid>
         ))}
       </Grid>
