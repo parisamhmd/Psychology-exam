@@ -104,6 +104,7 @@ function App() {
   const { mutate: apply } = useMutation(submitAnswer, {
     onSuccess: () => {
       localStorage.removeItem('applyData');
+      localStorage.removeItem('id');
       localStorage.setItem('step', 8);
       setStep(8);
     },

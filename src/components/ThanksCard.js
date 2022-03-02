@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 import Box from '@mui/material/Box';
-import { Typography, Button } from '@mui/material';
+import { Typography } from '@mui/material';
 import Container from '@mui/material/Container';
 import { makeStyles } from '@mui/styles';
 
@@ -20,7 +20,8 @@ export default function ThanksCard() {
   const classes = useStyles();
   React.useEffect(() => {
     localStorage.removeItem('step');
-  });
+  }, []);
+
   return (
     <Container component="main" maxWidth="sm">
       <ContentWrapper>
