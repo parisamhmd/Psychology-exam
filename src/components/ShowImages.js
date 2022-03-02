@@ -148,9 +148,8 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
           <Typography component="h6" variant="h6" sx={{ mt: 2 }}>
             {type === 'see' && 'به تصویر نگاه کنید'}
             {type === 'description' && 'صحنه را توصیف کنید'}
-            {type === 'speak' && 'نام جسمی درون اتاق را تکرار کنید'}
-            {type === 'repeat' &&
-              'هیجان غالب خود را تکرار کنید به دقت نگاه کنید'}
+            {type === 'room' && 'نام یک شیء در اتاق را تکرار کنید'}
+            {type === 'repeat' && 'هیجان غالب خود را تکرار کنید'}
           </Typography>
         </>
       ) : show === 'robots_after' ? (

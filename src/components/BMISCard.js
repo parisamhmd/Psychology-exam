@@ -130,7 +130,7 @@ export default function BasicTable({ buttonTitle, onClick: handleClick }) {
         type="submit"
         variant="contained"
         sx={{ mt: 4 }}
-        disabled={!Object.values(selectedValue).every((i) => !!i)}
+        disabled={!Object.values(selectedValue).every((i) => !!i || i === 0)}
         onClick={() => handleClick(selectedValue)}
       >
         {buttonTitle}
