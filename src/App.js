@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 
 import { useQuery, useMutation } from 'react-query';
@@ -27,6 +27,8 @@ import './App.css';
 function App() {
   const { link } = useParams();
 
+  const [isLoading, setIsLoading] = useState(true);
+
   const [step, setStep] = useState(+localStorage.getItem('step') || 1);
   const [registrationData, setRegistrationData] = useState({});
   const [applyData, setApplyData] = useState(
@@ -50,11 +52,30 @@ function App() {
     setOpen(false);
   };
 
+  const cacheImage = async (srcArray) => {
+    const promises = await srcArray.map((src) => {
+      return new Promise(function (resolve, reject) {
+        const img = new Image();
+
+        img.src = src;
+        img.onload = resolve();
+        img.onerror = reject();
+      });
+    });
+
+    await Promise.all(promises);
+    setIsLoading(false);
+  };
+
   const getImages = async () => {
     const res = await axios.get('/images');
     return res.data;
   };
   const { data: images, status } = useQuery('/images', getImages);
+
+  useEffect(() => {
+    images && cacheImage(images);
+  }, [images]);
 
   const handleRegister = async (data) => {
     const res = await axios.post('/register', data);
@@ -147,7 +168,7 @@ function App() {
       id: 5,
       component: (
         <SecondLevel
-          isLoading={!status || status === 'loading'}
+          isLoading={isLoading}
           images={images}
           type={link ?? 'see'}
           onClick={(data) => {
