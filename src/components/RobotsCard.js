@@ -35,40 +35,9 @@ export default function RobotsCard({ description, onChange: handleChange }) {
   const classes = useStyles();
   const [valence, setValence] = useState(null);
   const [arousal, setArousal] = useState(null);
-  const [countDownTrial, setCountDownTrial] = useState(1);
-  const [runTimer, setRunTimer] = useState(false);
-
-  useEffect(() => {
-    setRunTimer(true);
-  }, []);
-
-  useEffect(() => {
-    let timerIdTrial;
-
-    if (runTimer) {
-      setCountDownTrial(12);
-      timerIdTrial = setInterval(() => {
-        setCountDownTrial((countDown) => countDown - 1);
-      }, 1000);
-    } else {
-      clearInterval(timerIdTrial);
-    }
-
-    return () => clearInterval(timerIdTrial);
-  }, [runTimer]);
-
-  useEffect(() => {
-    if (countDownTrial < 1 && runTimer) {
-      setRunTimer(false);
-      setCountDownTrial(1);
-      handleChange(valence, arousal);
-    }
-  }, [countDownTrial, runTimer]);
 
   useEffect(() => {
     if (valence && arousal) {
-      setRunTimer(false);
-      setCountDownTrial(1);
       setTimeout(function () {
         handleChange(valence, arousal);
       }, 170);
