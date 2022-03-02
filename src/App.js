@@ -71,11 +71,11 @@ function App() {
     const res = await axios.get('/images');
     return res.data;
   };
-  const { data: images, status } = useQuery('/images', getImages);
-
-  useEffect(() => {
-    images && cacheImage(images);
-  }, [images]);
+  const { data: images } = useQuery('/images', getImages, {
+    onSuccess: (data) => {
+      cacheImage(data);
+    },
+  });
 
   const handleRegister = async (data) => {
     const res = await axios.post('/register', data);
@@ -197,43 +197,40 @@ function App() {
     },
     {
       id: 6,
-      component:
-        !status || status === 'loading' ? (
-          <Box sx={{ mt: 15 }}>
-            <CircularProgress size={70} />
-            <Typography variant="h4" sx={{ mt: 5 }}>
-              در حال بارگیری تصاویر آزمون
-            </Typography>
-          </Box>
-        ) : (
-          <ThirdLevel
-            images={images}
-            onClick={(data) => {
-              setApplyData({
+      component: isLoading ? (
+        <Box sx={{ mt: 15 }}>
+          <CircularProgress size={70} />
+          <Typography variant="h4" sx={{ mt: 5 }}>
+            در حال بارگیری تصاویر آزمون
+          </Typography>
+        </Box>
+      ) : (
+        <ThirdLevel
+          images={images}
+          onClick={(data) => {
+            setApplyData({
+              ...applyData,
+              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
+                reaction_time: data[item],
+                ...applyData.image_actions[item - 1],
+              })),
+            });
+
+            localStorage.setItem(
+              'applyData',
+              JSON.stringify({
                 ...applyData,
                 image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
                   reaction_time: data[item],
                   ...applyData.image_actions[item - 1],
                 })),
-              });
-
-              localStorage.setItem(
-                'applyData',
-                JSON.stringify({
-                  ...applyData,
-                  image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map(
-                    (item) => ({
-                      reaction_time: data[item],
-                      ...applyData.image_actions[item - 1],
-                    })
-                  ),
-                })
-              );
-              localStorage.setItem('step', 7);
-              setStep(7);
-            }}
-          />
-        ),
+              })
+            );
+            localStorage.setItem('step', 7);
+            setStep(7);
+          }}
+        />
+      ),
     },
     {
       id: 7,
