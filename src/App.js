@@ -288,7 +288,7 @@ function App() {
         <DialogContent>
           <DialogContentText id="alert-dialog-description">
             <Typography variant="h5" color="error">
-              خظا در ارسال اطلاعات
+              خطا در ارسال اطلاعات
             </Typography>
           </DialogContentText>
         </DialogContent>

@@ -18,6 +18,9 @@ const useStyles = makeStyles({
 
 export default function ThanksCard() {
   const classes = useStyles();
+  React.useEffect(() => {
+    localStorage.removeItem('step');
+  });
   return (
     <Container component="main" maxWidth="sm">
       <ContentWrapper>
