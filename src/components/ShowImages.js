@@ -4,6 +4,9 @@ import React from 'react';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import { makeStyles } from '@mui/styles';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import AddIcon from '@mui/icons-material/Add';
 
 import RobotsCard from './RobotsCard';
 import ContentWrapper from '../assets/ContentWrapper';
@@ -19,6 +22,12 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
   const classes = useStyles();
 
   const [item, setItem] = React.useState(0);
+
+  //   Fixtation Cross
+  const [countDownFixCross, setCountDownFixCross] = React.useState(1);
+  const [runFixCrossTimer, setRunFixCrossTimer] = React.useState(false);
+
+  // images
   const [countDownTrial, setCountDownTrial] = React.useState(1);
   const [runTimer, setRunTimer] = React.useState(false);
 
@@ -30,15 +39,40 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
   const [countDownBreak, setCountDownBreak] = React.useState(1);
   const [runBreakTimer, setRunBreakTimer] = React.useState(false);
 
-  const [show, setShow] = React.useState('images');
+  const [show, setShow] = React.useState('fix_cross');
   const [data, setData] = React.useState({});
 
-  //   images timer
   React.useEffect(() => {
-    setShow('images');
-    setRunTimer(true);
+    setShow('fix_cross');
+    setRunFixCrossTimer(true);
   }, []);
 
+  //   fixation cross
+  React.useEffect(() => {
+    let timerIdFixCross;
+
+    if (runFixCrossTimer) {
+      setCountDownFixCross(5);
+      timerIdFixCross = setInterval(() => {
+        setCountDownFixCross((countDown) => countDown - 1);
+      }, 1000);
+    } else {
+      clearInterval(timerIdFixCross);
+    }
+
+    return () => clearInterval(timerIdFixCross);
+  }, [runFixCrossTimer]);
+
+  React.useEffect(() => {
+    if (countDownFixCross < 1 && runFixCrossTimer) {
+      setRunFixCrossTimer(false);
+      setCountDownFixCross(1);
+      setShow('images');
+      setRunTimer(true);
+    }
+  }, [countDownFixCross, runFixCrossTimer]);
+
+  // images
   React.useEffect(() => {
     let timerIdTrial;
 
@@ -106,8 +140,8 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
     if (countDownBreak < 1 && runBreakTimer) {
       setRunBreakTimer(false);
       setCountDownBreak(1);
-      setShow('images');
-      setRunTimer(true);
+      setShow('fix_cross');
+      setRunFixCrossTimer(true);
     }
   }, [countDownBreak, runBreakTimer]);
 
@@ -117,12 +151,32 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
         width: '50rem',
       }}
     >
-      {show === 'images' ? (
+      {show === 'fix_cross' ? (
+        <Card
+          sx={{
+            minWidth: 275,
+            backgroundColor: 'black',
+            padding: '4rem',
+            mt: 9,
+          }}
+        >
+          <CardContent>
+            <AddIcon
+              fontSize="large"
+              style={{ color: 'white', fontSize: '4rem' }}
+            />
+          </CardContent>
+          <p style={{ color: 'white', fontSize: '4rem' }}>
+            {countDownFixCross}
+          </p>
+        </Card>
+      ) : show === 'images' ? (
         <>
           <img src={images[item]?.picture} className={classes.imageContainer} />
           <Typography component="h6" variant="h6" sx={{ mt: 2 }}>
             به دقت به تصویر نگاه کنید
           </Typography>
+          {countDownTrial}
         </>
       ) : show === 'robots_bofore' ? (
         <RobotsCard
@@ -168,8 +222,8 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
               },
             });
             setItem((item) => item + 1);
-            setShow(item === 4 ? 'break' : 'images');
-            item === 4 ? setRunBreakTimer(true) : setRunTimer(true);
+            setShow(item === 4 ? 'break' : 'fix_cross');
+            item === 4 ? setRunBreakTimer(true) : setRunFixCrossTimer(true);
           }}
         />
       ) : show === 'break' ? (

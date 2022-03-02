@@ -63,12 +63,12 @@ export default function RobotsCard({ description, onChange: handleChange }) {
   }, [countDownTrial, runTimer]);
 
   useEffect(() => {
-    if (arousal && arousal) {
+    if (valence && arousal) {
       setRunTimer(false);
       setCountDownTrial(1);
       setTimeout(function () {
         handleChange(valence, arousal);
-      }, 150);
+      }, 170);
     }
   }, [valence, arousal]);
 

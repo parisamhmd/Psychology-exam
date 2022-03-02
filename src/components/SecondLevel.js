@@ -5,9 +5,6 @@ import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
-import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import AddIcon from '@mui/icons-material/Add';
 
 import ShowImages from './ShowImages';
 
@@ -18,11 +15,8 @@ export default function SecondLevel({
   onClick: handleClick,
 }) {
   const [countDown, setCountDown] = React.useState(1);
-  const [countDownTrial, setCountDownTrial] = React.useState(1);
   const [runTimer, setRunTimer] = React.useState(false);
-  const [runTrialTimer, setRunTrialTimer] = React.useState(false);
   const [show, setShow] = React.useState(false);
-  const [showImages, setShowImages] = React.useState(false);
 
   React.useEffect(() => {
     let timerId;
@@ -44,32 +38,8 @@ export default function SecondLevel({
       setRunTimer(false);
       setCountDown(1);
       setShow(true);
-      setRunTrialTimer(true);
     }
   }, [countDown, runTimer]);
-
-  React.useEffect(() => {
-    let timerIdTrial;
-
-    if (runTrialTimer) {
-      setCountDownTrial(5);
-      timerIdTrial = setInterval(() => {
-        setCountDownTrial((countDown) => countDown - 1);
-      }, 1000);
-    } else {
-      clearInterval(timerIdTrial);
-    }
-
-    return () => clearInterval(timerIdTrial);
-  }, [runTrialTimer]);
-
-  React.useEffect(() => {
-    if (countDownTrial < 1 && runTrialTimer) {
-      setRunTrialTimer(false);
-      setCountDownTrial(1);
-      setShowImages(true);
-    }
-  }, [countDownTrial, runTrialTimer]);
 
   return (
     <div>
@@ -109,22 +79,6 @@ export default function SecondLevel({
                 شروع مرحله‌ی دوم آزمون
               </Button>
             </Box>
-          ) : !showImages ? (
-            <Card
-              sx={{
-                minWidth: 275,
-                backgroundColor: 'black',
-                padding: '4rem',
-                mt: 9,
-              }}
-            >
-              <CardContent>
-                <AddIcon
-                  fontSize="large"
-                  style={{ color: 'white', fontSize: '4rem' }}
-                />
-              </CardContent>
-            </Card>
           ) : (
             <ShowImages type={type} images={images} onClick={handleClick} />
           )}

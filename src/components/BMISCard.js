@@ -88,8 +88,8 @@ export default function BasicTable({ buttonTitle, onClick: handleClick }) {
           </Typography>
         </Typography>
         <Typography component="h6" variant="subtitle1" sx={{ mb: 4 }}>
-          هر کدام از صفت های زیر چقدر در مورد خلق شما صدق می‌کند؟ لطفاً علامت
-          بزنید{' '}
+          در حال حاضر هر کدام از صفت های زیر چقدر در مورد خلق شما صدق می‌کند؟
+          لطفاً علامت بزنید{' '}
         </Typography>
       </Box>
       <TableContainer component={Paper}>
