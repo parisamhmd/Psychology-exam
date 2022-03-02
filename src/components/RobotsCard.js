@@ -22,6 +22,9 @@ import a4 from '../assets/images/a4.png';
 import a5 from '../assets/images/a5.png';
 
 const useStyles = makeStyles({
+  container: {
+    width: '50rem',
+  },
   imageContainer: {
     width: '100%',
     height: '100%',
@@ -73,94 +76,96 @@ export default function RobotsCard({ description, onChange: handleChange }) {
   }, [valence, arousal]);
 
   return (
-    <ContentWrapper component="main" maxWidth="xl">
-      <Grid container xs={12}>
-        <Typography component="h6" variant="subtitle2" sx={{ mb: 3 }}>
-          {description}
-        </Typography>
-      </Grid>
-      <Grid
-        container
-        sx={{ gap: 2 }}
-        wrap="nowrap"
-        alignItems="center"
-        flexDirection="row-reverse"
-      >
-        {[v1, v2, v3, v4, v5].map((v, index) => (
-          <Grid key={`v${index + 1}`} item xs={3}>
-            <Card>
-              <img
-                src={v}
-                alt={`v${index + 1}`}
-                className={classes.imageContainer}
+    <div className={classes.container}>
+      <ContentWrapper component="main" maxWidth="xl">
+        <Grid container xs={12}>
+          <Typography component="h6" variant="subtitle2" sx={{ mb: 3 }}>
+            {description}
+          </Typography>
+        </Grid>
+        <Grid
+          container
+          sx={{ gap: 2 }}
+          wrap="nowrap"
+          alignItems="center"
+          flexDirection="row-reverse"
+        >
+          {[v1, v2, v3, v4, v5].map((v, index) => (
+            <Grid key={`v${index + 1}`} item xs={3}>
+              <Card>
+                <img
+                  src={v}
+                  alt={`v${index + 1}`}
+                  className={classes.imageContainer}
+                />
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+        <Grid
+          container
+          sx={{ mr: 4.75 }}
+          wrap="nowrap"
+          alignItems="center"
+          justifyContent="space-between"
+          flexDirection="row-reverse"
+        >
+          <Grid item xs={1}></Grid>
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
+            <Grid item key={i} xs={1}>
+              <Radio
+                disableRipple
+                checked={valence === i}
+                onChange={() => setValence(i)}
+                value={i}
+                name="radio-buttons"
               />
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-      <Grid
-        container
-        sx={{ mr: 4.75 }}
-        wrap="nowrap"
-        alignItems="center"
-        justifyContent="space-between"
-        flexDirection="row-reverse"
-      >
-        <Grid item xs={1}></Grid>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-          <Grid item key={i} xs={1}>
-            <Radio
-              disableRipple
-              checked={valence === i}
-              onChange={() => setValence(i)}
-              value={i}
-              name="radio-buttons"
-            />
-            {i}
-          </Grid>
-        ))}
-      </Grid>
-      <Grid
-        container
-        sx={{ gap: 2, mt: 4 }}
-        wrap="nowrap"
-        alignItems="center"
-        flexDirection="row-reverse"
-      >
-        {[a1, a2, a3, a4, a5].map((a, index) => (
-          <Grid key={`a${index + 1}`} item xs={3}>
-            <Card>
-              <img
-                src={a}
-                alt={`a${index + 1}`}
-                className={classes.imageContainer}
+              {i}
+            </Grid>
+          ))}
+        </Grid>
+        <Grid
+          container
+          sx={{ gap: 2, mt: 4 }}
+          wrap="nowrap"
+          alignItems="center"
+          flexDirection="row-reverse"
+        >
+          {[a1, a2, a3, a4, a5].map((a, index) => (
+            <Grid key={`a${index + 1}`} item xs={3}>
+              <Card>
+                <img
+                  src={a}
+                  alt={`a${index + 1}`}
+                  className={classes.imageContainer}
+                />
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+        <Grid
+          container
+          sx={{ mr: 4.75 }}
+          wrap="nowrap"
+          alignItems="center"
+          justifyContent="space-between"
+          flexDirection="row-reverse"
+        >
+          <Grid item xs={1}></Grid>
+          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
+            <Grid item key={i} xs={1} justifyContent="flex-start">
+              <Radio
+                disableRipple
+                checked={arousal === i}
+                onChange={() => setArousal(i)}
+                value={i}
+                name="radio-buttons"
               />
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
-      <Grid
-        container
-        sx={{ mr: 4.75 }}
-        wrap="nowrap"
-        alignItems="center"
-        justifyContent="space-between"
-        flexDirection="row-reverse"
-      >
-        <Grid item xs={1}></Grid>
-        {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-          <Grid item key={i} xs={1} justifyContent="flex-start">
-            <Radio
-              disableRipple
-              checked={arousal === i}
-              onChange={() => setArousal(i)}
-              value={i}
-              name="radio-buttons"
-            />
-            {i}
-          </Grid>
-        ))}
-      </Grid>
-    </ContentWrapper>
+              {i}
+            </Grid>
+          ))}
+        </Grid>
+      </ContentWrapper>
+    </div>
   );
 }

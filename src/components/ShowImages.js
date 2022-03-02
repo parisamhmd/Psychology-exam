@@ -146,15 +146,11 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
   }, [countDownBreak, runBreakTimer]);
 
   const renderTrial = () => (
-    <div
-      style={{
-        width: '50rem',
-      }}
-    >
+    <div>
       {show === 'fix_cross' ? (
         <Card
           sx={{
-            minWidth: 275,
+            width: 275,
             backgroundColor: 'black',
             padding: '4rem',
             mt: 9,
@@ -166,9 +162,6 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
               style={{ color: 'white', fontSize: '4rem' }}
             />
           </CardContent>
-          <p style={{ color: 'white', fontSize: '4rem' }}>
-            {countDownFixCross}
-          </p>
         </Card>
       ) : show === 'images' ? (
         <>
@@ -176,7 +169,6 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
           <Typography component="h6" variant="h6" sx={{ mt: 2 }}>
             به دقت به تصویر نگاه کنید
           </Typography>
-          {countDownTrial}
         </>
       ) : show === 'robots_bofore' ? (
         <RobotsCard

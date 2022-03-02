@@ -5,6 +5,9 @@ import Typography from '@mui/material/Typography';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
 import { makeStyles } from '@mui/styles';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import AddIcon from '@mui/icons-material/Add';
 
 import ContentWrapper from '../assets/ContentWrapper';
 
@@ -22,6 +25,34 @@ export default function ThirdLevel({ images, onClick: handleClick }) {
   const [data, setData] = useState({});
   const [finalData, setFinalData] = useState({});
   const [start] = useState(new Date().getTime());
+  const [showFixCross, setShowFixCross] = useState(true);
+
+  //   Fixtation Cross
+  const [countDownFixCross, setCountDownFixCross] = React.useState(1);
+  const [runFixCrossTimer, setRunFixCrossTimer] = React.useState(true);
+
+  React.useEffect(() => {
+    let timerIdFixCross;
+
+    if (runFixCrossTimer) {
+      setCountDownFixCross(5);
+      timerIdFixCross = setInterval(() => {
+        setCountDownFixCross((countDown) => countDown - 1);
+      }, 1000);
+    } else {
+      clearInterval(timerIdFixCross);
+    }
+
+    return () => clearInterval(timerIdFixCross);
+  }, [runFixCrossTimer]);
+
+  React.useEffect(() => {
+    if (countDownFixCross < 1 && runFixCrossTimer) {
+      setRunFixCrossTimer(false);
+      setCountDownFixCross(1);
+      setShowFixCross(false);
+    }
+  }, [countDownFixCross, runFixCrossTimer]);
 
   return (
     <Box
@@ -33,7 +64,23 @@ export default function ThirdLevel({ images, onClick: handleClick }) {
         gap: 3,
       }}
     >
-      {item < 10 ? (
+      {showFixCross ? (
+        <Card
+          sx={{
+            minWidth: 275,
+            backgroundColor: 'black',
+            padding: '4rem',
+            mt: 9,
+          }}
+        >
+          <CardContent>
+            <AddIcon
+              fontSize="large"
+              style={{ color: 'white', fontSize: '4rem' }}
+            />
+          </CardContent>
+        </Card>
+      ) : item < 10 ? (
         <>
           <img src={images[item].picture} className={classes.imageContainer} />
           <Button
