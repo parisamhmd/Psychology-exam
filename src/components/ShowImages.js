@@ -11,12 +11,16 @@ import AddIcon from '@mui/icons-material/Add';
 import RobotsCard from './RobotsCard';
 import ContentWrapper from '../assets/ContentWrapper';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   imageContainer: {
     width: '28rem',
     height: '29rem',
+    [theme.breakpoints.down('md')]: {
+      width: '20rem',
+      height: '21rem',
+    },
   },
-});
+}));
 
 export default function ShowImages({ type, images, onClick: handleClick }) {
   const classes = useStyles();
@@ -77,7 +81,7 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
     let timerIdTrial;
 
     if (runTimer) {
-      setCountDownTrial(5);
+      setCountDownTrial(60);
       timerIdTrial = setInterval(() => {
         setCountDownTrial((countDown) => countDown - 1);
       }, 1000);
@@ -150,7 +154,7 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
       {show === 'fix_cross' ? (
         <Card
           sx={{
-            width: 275,
+            width: { lg: 275, xs: 190 },
             backgroundColor: 'black',
             padding: '4rem',
             mt: 9,
