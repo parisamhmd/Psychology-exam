@@ -44,7 +44,11 @@ export default function SecondLevel({
   return (
     <div>
       {isLoading ? (
-        <Box sx={{ mt: 15 }}>
+        <Box
+          sx={{
+            mt: { sm: 15, xs: 5 },
+          }}
+        >
           <CircularProgress size={70} />
           <Typography variant="h4" sx={{ mt: 5 }}>
             در حال بارگیری تصاویر آزمون
@@ -62,7 +66,7 @@ export default function SecondLevel({
                 display: 'flex',
                 flexDirection: 'column',
                 alignItems: 'center',
-                mt: 20,
+                mt: { sm: 20, xs: 3 },
               }}
             >
               <Typography variant="h6" sx={{ width: '60%' }}>
