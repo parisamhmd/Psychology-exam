@@ -105,8 +105,8 @@ function App() {
     onSuccess: () => {
       localStorage.removeItem('applyData');
       localStorage.removeItem('id');
-      localStorage.setItem('step', 8);
-      setStep(8);
+      localStorage.setItem('step', 7);
+      setStep(7);
     },
     onError: (error) => {
       setError(error.response.data);
@@ -197,7 +197,7 @@ function App() {
       ),
     },
     {
-      id: 6,
+      id: 9,
       component: isLoading ? (
         <Box sx={{ mt: 15 }}>
           <CircularProgress size={70} />
@@ -234,7 +234,7 @@ function App() {
       ),
     },
     {
-      id: 7,
+      id: 6,
       component: (
         <BMISCARD
           buttonTitle="پایان آزمون"
@@ -251,7 +251,7 @@ function App() {
       ),
     },
     {
-      id: 8,
+      id: 7,
       component: <ThanksCard />,
     },
   ];

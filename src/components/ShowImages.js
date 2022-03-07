@@ -27,6 +27,8 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
 
   const [item, setItem] = React.useState(0);
 
+  const [start, setStart] = React.useState(new Date().getTime());
+
   //   Fixtation Cross
   const [countDownFixCross, setCountDownFixCross] = React.useState(1);
   const [runFixCrossTimer, setRunFixCrossTimer] = React.useState(false);
@@ -73,6 +75,7 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
       setCountDownFixCross(1);
       setShow('images');
       setRunTimer(true);
+      setStart(new Date().getTime());
     }
   }, [countDownFixCross, runFixCrossTimer]);
 
@@ -96,6 +99,13 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
     if (countDownTrial < 1 && runTimer) {
       setRunTimer(false);
       setCountDownTrial(1);
+      setData({
+        ...data,
+        [images[item].id]: {
+          ...data[images[item].id],
+          reaction_time_before: 60000,
+        },
+      });
       setShow('robots_bofore');
     }
   }, [countDownTrial, runTimer]);
@@ -105,7 +115,8 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
     let timerIdIntervention;
 
     if (runInterventionTimer) {
-      setCountDownIntervention(30);
+      // TODO 30
+      setCountDownIntervention(3);
       timerIdIntervention = setInterval(() => {
         setCountDownIntervention((countDown) => countDown - 1);
       }, 1000);
@@ -170,9 +181,27 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
       ) : show === 'images' ? (
         <>
           <img src={images[item]?.picture} className={classes.imageContainer} />
-          <Typography component="h6" variant="h6" sx={{ mt: 2 }}>
+          <Typography component="h6" variant="h6" sx={{ my: 2 }}>
             به دقت به تصویر نگاه کنید
           </Typography>
+          <Button
+            variant="contained"
+            onClick={() => {
+              const end = new Date().getTime();
+              setData({
+                ...data,
+                [images[item].id]: {
+                  ...data[images[item].id],
+                  reaction_time_before: end - start,
+                },
+              });
+              setRunTimer(false);
+              setCountDownTrial(1);
+              setShow('robots_bofore');
+            }}
+          >
+            کافی
+          </Button>
         </>
       ) : show === 'robots_bofore' ? (
         <RobotsCard
@@ -250,7 +279,7 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
             }}
             sx={{ my: 5 }}
           >
-            ورود به مرحلۀ سوم آزمون
+            ورود به مرحلۀ پایانی آزمون{' '}
           </Button>
           <Typography variant="h5">
             در این مرحله ده تصویر قبل را مشاهده خواهید کرد. لطفاً طبق دستورالعمل
