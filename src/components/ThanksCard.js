@@ -9,12 +9,16 @@ import { makeStyles } from '@mui/styles';
 import ContentWrapper from '../assets/ContentWrapper';
 import thanksImage from '../assets/images/thank.png';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme) => ({
   imageContainer: {
     width: '25rem',
     height: '20rem',
+    [theme.breakpoints.down('md')]: {
+      width: '20rem',
+      height: '15rem',
+    },
   },
-});
+}));
 
 export default function ThanksCard() {
   const classes = useStyles();

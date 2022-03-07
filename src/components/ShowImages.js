@@ -115,8 +115,7 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
     let timerIdIntervention;
 
     if (runInterventionTimer) {
-      // TODO 30
-      setCountDownIntervention(3);
+      setCountDownIntervention(30);
       timerIdIntervention = setInterval(() => {
         setCountDownIntervention((countDown) => countDown - 1);
       }, 1000);
