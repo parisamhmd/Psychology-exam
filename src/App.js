@@ -212,23 +212,28 @@ function App() {
       ) : (
         <ThirdLevel
           images={images}
+          type={link || 'see'}
           onClick={(data) => {
+            console.log(data);
             setApplyData({
               ...applyData,
-              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
-                reaction_time: data[item],
-                ...applyData.image_actions[item - 1],
-              })),
+              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(
+                (item) => ({
+                  ...data[item],
+                  ...applyData.image_actions[item - 1],
+                })
+              ),
             });
-
             localStorage.setItem(
               'applyData',
               JSON.stringify({
                 ...applyData,
-                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
-                  reaction_time: data[item],
-                  ...applyData.image_actions[item - 1],
-                })),
+                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(
+                  (item) => ({
+                    ...data[item],
+                    ...applyData.image_actions[item - 1],
+                  })
+                ),
               })
             );
             localStorage.setItem('step', 7);
@@ -252,20 +257,24 @@ function App() {
           onClick={(data) => {
             setApplyData({
               ...applyData,
-              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
-                reaction_time: data[item],
-                ...applyData.image_actions[item - 1],
-              })),
+              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(
+                (item) => ({
+                  ...data[item],
+                  ...applyData.image_actions[item - 1],
+                })
+              ),
             });
 
             localStorage.setItem(
               'applyData',
               JSON.stringify({
                 ...applyData,
-                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
-                  reaction_time: data[item],
-                  ...applyData.image_actions[item - 1],
-                })),
+                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(
+                  (item) => ({
+                    reaction_time: data[item],
+                    ...applyData.image_actions[item - 1],
+                  })
+                ),
               })
             );
             localStorage.setItem('step', 8);

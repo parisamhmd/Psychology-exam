@@ -29,21 +29,13 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
 
   const [start, setStart] = React.useState(new Date().getTime());
 
-  //   Fixtation Cross
+  //   Fixation Cross
   const [countDownFixCross, setCountDownFixCross] = React.useState(1);
   const [runFixCrossTimer, setRunFixCrossTimer] = React.useState(false);
 
   // images
   const [countDownTrial, setCountDownTrial] = React.useState(1);
   const [runTimer, setRunTimer] = React.useState(false);
-
-  //   Intervention
-  const [countDownIntervention, setCountDownIntervention] = React.useState(1);
-  const [runInterventionTimer, setRunInterventionTimer] = React.useState(false);
-
-  //   Break
-  const [countDownBreak, setCountDownBreak] = React.useState(1);
-  const [runBreakTimer, setRunBreakTimer] = React.useState(false);
 
   const [show, setShow] = React.useState('fix_cross');
   const [data, setData] = React.useState({});
@@ -110,55 +102,6 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
     }
   }, [countDownTrial, runTimer]);
 
-  //   Intervention
-  React.useEffect(() => {
-    let timerIdIntervention;
-
-    if (runInterventionTimer) {
-      setCountDownIntervention(30);
-      timerIdIntervention = setInterval(() => {
-        setCountDownIntervention((countDown) => countDown - 1);
-      }, 1000);
-    } else {
-      clearInterval(timerIdIntervention);
-    }
-
-    return () => clearInterval(timerIdIntervention);
-  }, [runInterventionTimer]);
-
-  React.useEffect(() => {
-    if (countDownIntervention < 1 && runInterventionTimer) {
-      setRunInterventionTimer(false);
-      setCountDownIntervention(1);
-      setShow('robots_after');
-    }
-  }, [countDownIntervention, runInterventionTimer]);
-
-  //   Break
-  React.useEffect(() => {
-    let timerIdBreak;
-
-    if (runBreakTimer) {
-      setCountDownBreak(60);
-      timerIdBreak = setInterval(() => {
-        setCountDownBreak((countDown) => countDown - 1);
-      }, 1000);
-    } else {
-      clearInterval(timerIdBreak);
-    }
-
-    return () => clearInterval(timerIdBreak);
-  }, [runBreakTimer]);
-
-  React.useEffect(() => {
-    if (countDownBreak < 1 && runBreakTimer) {
-      setRunBreakTimer(false);
-      setCountDownBreak(1);
-      setShow('fix_cross');
-      setRunFixCrossTimer(true);
-    }
-  }, [countDownBreak, runBreakTimer]);
-
   const renderTrial = () => (
     <div>
       {show === 'fix_cross' ? (
@@ -217,19 +160,10 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
               },
             });
             setItem((item) => item + 1);
-            setShow(item === 4 ? 'break' : 'fix_cross');
-            item === 4 ? setRunBreakTimer(true) : setRunFixCrossTimer(true);
+            setShow('fix_cross');
+            setRunFixCrossTimer(true);
           }}
         />
-      ) : show === 'break' ? (
-        <>
-          <Typography component="h6" variant="h4" sx={{ mt: 7 }}>
-            یک دقیقه استراحت کنید
-          </Typography>
-          <Typography component="h6" variant="h4" sx={{ mt: 2 }}>
-            {countDownBreak}
-          </Typography>
-        </>
       ) : null}
     </div>
   );
