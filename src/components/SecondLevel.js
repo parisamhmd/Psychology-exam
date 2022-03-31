@@ -9,7 +9,6 @@ import Button from '@mui/material/Button';
 import ShowImages from './ShowImages';
 
 export default function SecondLevel({
-  type,
   images,
   isLoading,
   onClick: handleClick,
@@ -70,10 +69,12 @@ export default function SecondLevel({
               }}
             >
               <Typography variant="h6" sx={{ width: { sm: '60%', xs: '80%' } }}>
-                در این مرحله 10 تصویر (5 تصویر خوشایند و 5 تصویر ناخوشایند)
-                خواهید دید تا تجربۀ هیجانی شما در مواجهه با تصاویر و حالت‌های
-                مختلف ثبت شود. لطفاً طبق دستورالعمل‌هایی که طی آزمون داده می‌شود
-                عمل کنید. بین هر 5 تصویر یک دقیقه استراحت خواهید داشت.
+                در این مرحله 10 تصویر ناخوشایند خواهید دید تا تجربۀ هیجانی شما
+                در مواجهه با تصاویر مختلف ثبت شود. لطفاً تا زمانی که تحمل تماشای
+                تصویر را دارید به دقت آن را نگاه کنید و پس از آن با زدن دگمۀ
+                کافی به قسمت بعدی بروید و احساس خود را با انتخاب یک عدد (از 1 تا
+                9) از آدمک‌های ستون اول و یک عدد از آدمک‌های ستون دوم (از 1 تا
+                9) نشان دهید.{' '}
               </Typography>
               <Button
                 variant="contained"
@@ -84,7 +85,7 @@ export default function SecondLevel({
               </Button>
             </Box>
           ) : (
-            <ShowImages type={type} images={images} onClick={handleClick} />
+            <ShowImages images={images} onClick={handleClick} />
           )}
         </>
       )}

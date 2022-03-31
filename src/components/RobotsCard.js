@@ -40,7 +40,7 @@ export default function RobotsCard({ description, onChange: handleChange }) {
     if (valence && arousal) {
       setTimeout(function () {
         handleChange(valence, arousal);
-      }, 170);
+      }, 150);
     }
   }, [valence, arousal]);
 

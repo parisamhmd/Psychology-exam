@@ -20,6 +20,7 @@ import PersonalInfoForm from './components/PersonalInfoForm';
 import BMISCARD from './components/BMISCard';
 import SecondLevel from './components/SecondLevel';
 import ThirdLevel from './components/ThirdLevel';
+import ForthLevel from './components/ForthLevel';
 import ThanksCard from './components/ThanksCard';
 
 import './App.css';
@@ -105,8 +106,8 @@ function App() {
     onSuccess: () => {
       localStorage.removeItem('applyData');
       localStorage.removeItem('id');
-      localStorage.setItem('step', 7);
-      setStep(7);
+      localStorage.setItem('step', 9);
+      setStep(9);
     },
     onError: (error) => {
       setError(error.response.data);
@@ -171,23 +172,26 @@ function App() {
         <SecondLevel
           isLoading={isLoading}
           images={images}
-          type={link ?? 'see'}
           onClick={(data) => {
             setApplyData({
               ...applyData,
-              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
-                image: item,
-                ...data[item],
-              })),
+              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(
+                (item) => ({
+                  image: item,
+                  ...data[item],
+                })
+              ),
             });
             localStorage.setItem(
               'applyData',
               JSON.stringify({
                 ...applyData,
-                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
-                  image: item,
-                  ...data[item],
-                })),
+                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(
+                  (item) => ({
+                    image: item,
+                    ...data[item],
+                  })
+                ),
               })
             );
             localStorage.setItem('step', 6);
@@ -197,7 +201,7 @@ function App() {
       ),
     },
     {
-      id: 9,
+      id: 6,
       component: isLoading ? (
         <Box sx={{ mt: 15 }}>
           <CircularProgress size={70} />
@@ -234,7 +238,44 @@ function App() {
       ),
     },
     {
-      id: 6,
+      id: 7,
+      component: isLoading ? (
+        <Box sx={{ mt: 15 }}>
+          <CircularProgress size={70} />
+          <Typography variant="h4" sx={{ mt: 5 }}>
+            در حال بارگیری تصاویر آزمون
+          </Typography>
+        </Box>
+      ) : (
+        <ForthLevel
+          images={images}
+          onClick={(data) => {
+            setApplyData({
+              ...applyData,
+              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
+                reaction_time: data[item],
+                ...applyData.image_actions[item - 1],
+              })),
+            });
+
+            localStorage.setItem(
+              'applyData',
+              JSON.stringify({
+                ...applyData,
+                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10].map((item) => ({
+                  reaction_time: data[item],
+                  ...applyData.image_actions[item - 1],
+                })),
+              })
+            );
+            localStorage.setItem('step', 8);
+            setStep(8);
+          }}
+        />
+      ),
+    },
+    {
+      id: 8,
       component: (
         <BMISCARD
           buttonTitle="پایان آزمون"
@@ -251,7 +292,7 @@ function App() {
       ),
     },
     {
-      id: 7,
+      id: 9,
       component: <ThanksCard />,
     },
   ];

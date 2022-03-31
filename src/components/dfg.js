@@ -106,7 +106,7 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
           tolerance1: null,
         },
       });
-      setShow('robots');
+      setShow('robots_bofore');
     }
   }, [countDownTrial, runTimer]);
 
@@ -196,13 +196,13 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
               });
               setRunTimer(false);
               setCountDownTrial(1);
-              setShow('robots');
+              setShow('robots_bofore');
             }}
           >
             کافی
           </Button>
         </>
-      ) : show === 'robots' ? (
+      ) : show === 'robots_bofore' ? (
         <RobotsCard
           description="
           لطفا احساس خود را با انتخاب یک عدد (از 1 تا 9) از آدمک‌های ردیف اول و یک عدد از آدمک‌های ردیف دوم (1 تا 9) نشان دهید.
@@ -214,6 +214,35 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
                 ...data[images[item].id],
                 valence1: valence,
                 arousal1: arousal,
+              },
+            });
+            setShow('intervention');
+            setRunInterventionTimer(true);
+          }}
+        />
+      ) : show === 'intervention' ? (
+        <>
+          <img src={images[item]?.picture} className={classes.imageContainer} />
+          <Typography component="h6" variant="h6" sx={{ mt: 2 }}>
+            {type === 'see' && 'به تصویر نگاه کنید'}
+            {type === 'description' && 'صحنه را توصیف کنید'}
+            {type === 'room' && 'نام یک شیء در اتاق را تکرار کنید'}
+            {type === 'repeat' && 'هیجان غالب خود را تکرار کنید'}
+          </Typography>
+        </>
+      ) : show === 'robots_after' ? (
+        <RobotsCard
+          description="
+          لطفا مجدداً احساس خود را با انتخاب یک عدد (از 1 تا 9) از آدمک‌های
+          ردیف اول و یک عدد از آدمک‌های ردیف دوم (1 تا 9) نشان دهید.
+          "
+          onChange={(valence, arousal) => {
+            setData({
+              ...data,
+              [images[item].id]: {
+                ...data[images[item].id],
+                valence2: valence,
+                arousal2: arousal,
               },
             });
             setItem((item) => item + 1);
@@ -249,12 +278,19 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
             }}
             sx={{ my: 5 }}
           >
-            ورود به مرحلۀ سوم آزمون{' '}
+            ورود به مرحلۀ پایانی آزمون{' '}
           </Button>
           <Typography variant="h5">
-            در این مرحله 10 تصویر ناخوشایند را برای بار دوم خواهید دید تا تجربۀ
-            هیجانی شما در مواجهه با تصاویر و حالت‌های مختلف ثبت شود. لطفاً طبق
-            دستورالعمل‌هایی که طی آزمون داده می‌شود عمل کنید.{' '}
+            در این مرحله ده تصویر قبل را مشاهده خواهید کرد. لطفاً طبق دستورالعمل
+            زیر هر تصویر عمل کنید.
+          </Typography>
+          <Typography variant="subtitle1" sx={{ mt: 2 }}>
+            برای تصاویر مثبت: لطفاً تا زمانی که علاقه دارید به تصویر نگاه کنید.
+            در غیر این صورت با انتخاب دگمۀ کافی به مرحلۀ بعد بروید.
+          </Typography>
+          <Typography variant="subtitle1" sx={{ mt: 2 }}>
+            برای تصاویر منفی: لطفاً تا زمانی که تحمل تماشای تصویر را دارید آن را
+            نگاه کنید. در غیر این صورت با انتخاب دگمۀ کافی به مرحلۀ بعد بروید.{' '}
           </Typography>
         </ContentWrapper>
       )}
