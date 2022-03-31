@@ -22,10 +22,12 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ThirdLevel({ type, images, onClick: handleClick }) {
+export default function FourthLevel({ type, images, onClick: handleClick }) {
   const classes = useStyles();
 
   const [item, setItem] = React.useState(0);
+
+  const [start, setStart] = React.useState(new Date().getTime());
 
   //   Fixation Cross
   const [countDownFixCross, setCountDownFixCross] = React.useState(1);
@@ -48,7 +50,7 @@ export default function ThirdLevel({ type, images, onClick: handleClick }) {
     let timerIdFixCross;
 
     if (runFixCrossTimer) {
-      setCountDownFixCross(10);
+      setCountDownFixCross(5);
       timerIdFixCross = setInterval(() => {
         setCountDownFixCross((countDown) => countDown - 1);
       }, 1000);
@@ -65,6 +67,7 @@ export default function ThirdLevel({ type, images, onClick: handleClick }) {
       setCountDownFixCross(1);
       setShow('images');
       setRunTimer(true);
+      setStart(new Date().getTime());
     }
   }, [countDownFixCross, runFixCrossTimer]);
 
@@ -73,7 +76,7 @@ export default function ThirdLevel({ type, images, onClick: handleClick }) {
     let timerIdTrial;
 
     if (runTimer) {
-      setCountDownTrial(30);
+      setCountDownTrial(60);
       timerIdTrial = setInterval(() => {
         setCountDownTrial((countDown) => countDown - 1);
       }, 1000);
@@ -88,7 +91,16 @@ export default function ThirdLevel({ type, images, onClick: handleClick }) {
     if (countDownTrial < 1 && runTimer) {
       setRunTimer(false);
       setCountDownTrial(1);
-      setShow('robots');
+      setData({
+        ...data,
+        [images[item].id]: {
+          ...data[images[item].id],
+          tolerance2: null,
+        },
+      });
+      setItem((item) => item + 1);
+      setShow('fix_cross');
+      setRunFixCrossTimer(true);
     }
   }, [countDownTrial, runTimer]);
 
@@ -114,31 +126,29 @@ export default function ThirdLevel({ type, images, onClick: handleClick }) {
         <>
           <img src={images[item]?.picture} className={classes.imageContainer} />
           <Typography component="h6" variant="h6" sx={{ my: 2 }}>
-            {type === 'see' && 'به تصویر نگاه کنید'}
-            {type === 'description' && 'صحنه را توصیف کنید'}
-            {type === 'room' && 'نام یک شیء در اتاق را تکرار کنید'}
-            {type === 'repeat' && 'هیجان غالب خود را تکرار کنید'}{' '}
+            به دقت به تصویر نگاه کنید
           </Typography>
+          <Button
+            variant="contained"
+            onClick={() => {
+              const end = new Date().getTime();
+              setData({
+                ...data,
+                [images[item].id]: {
+                  ...data[images[item].id],
+                  tolerance2: end - start,
+                },
+              });
+              setRunTimer(false);
+              setCountDownTrial(1);
+              setItem((item) => item + 1);
+              setShow('fix_cross');
+              setRunFixCrossTimer(true);
+            }}
+          >
+            کافی
+          </Button>
         </>
-      ) : show === 'robots' ? (
-        <RobotsCard
-          description="
-          لطفا احساس خود را با انتخاب یک عدد (از 1 تا 9) از آدمک‌های ردیف اول و یک عدد از آدمک‌های ردیف دوم (1 تا 9) نشان دهید.
-          "
-          onChange={(valence, arousal) => {
-            setData({
-              ...data,
-              [images[item].id]: {
-                ...data[images[item].id],
-                valence2: valence,
-                arousal2: arousal,
-              },
-            });
-            setItem((item) => item + 1);
-            setShow('fix_cross');
-            setRunFixCrossTimer(true);
-          }}
-        />
       ) : null}
     </div>
   );
@@ -149,7 +159,7 @@ export default function ThirdLevel({ type, images, onClick: handleClick }) {
       ) : (
         <ContentWrapper>
           <Typography component="h6" variant="h5">
-            پایان مرحلۀ سوم آزمون{' '}
+            پایان مرحلۀ چهارم آزمون{' '}
           </Typography>
           <Button
             variant="contained"
@@ -158,12 +168,8 @@ export default function ThirdLevel({ type, images, onClick: handleClick }) {
             }}
             sx={{ my: 5 }}
           >
-            ورود به مرحلۀ چهارم آزمون{' '}
+            ورود به مرحلۀ آخر آزمون{' '}
           </Button>
-          <Typography variant="h5">
-            لطفاً تا زمانی که تحمل تماشای تصویر را دارید آن را نگاه کنید و پس از
-            آن با زدن دگمه کافی به قسمت بعدی بروید.{' '}
-          </Typography>
         </ContentWrapper>
       )}
     </div>

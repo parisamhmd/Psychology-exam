@@ -20,7 +20,7 @@ import PersonalInfoForm from './components/PersonalInfoForm';
 import BMISCARD from './components/BMISCard';
 import SecondLevel from './components/SecondLevel';
 import ThirdLevel from './components/ThirdLevel';
-import ForthLevel from './components/ForthLevel';
+import ForthLevel from './components/FourthLevel';
 import ThanksCard from './components/ThanksCard';
 
 import './App.css';
@@ -271,7 +271,7 @@ function App() {
                 ...applyData,
                 image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(
                   (item) => ({
-                    reaction_time: data[item],
+                    ...data[item],
                     ...applyData.image_actions[item - 1],
                   })
                 ),
