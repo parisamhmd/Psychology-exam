@@ -23,6 +23,7 @@ import a4 from '../assets/images/a4.png';
 import a5 from '../assets/images/a5.png';
 
 import vector from '../assets/images/vector.png';
+import horizontalVector from '../assets/images/horizontalVector.png';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -40,6 +41,9 @@ const useStyles = makeStyles((theme) => ({
     height: '66rem',
     width: '4rem',
     marginRight: '-1rem',
+  },
+  horizontalVectorImg: {
+    width: '84%',
   },
 }));
 
@@ -110,6 +114,14 @@ export default function RobotsCard({ description, onChange: handleChange }) {
                 </Grid>
               ))}
             </Grid>
+            <Grid sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Typography>خوشایند</Typography>
+              <img
+                src={horizontalVector}
+                className={classes.horizontalVectorImg}
+              />
+              <Typography>ناخوشایند</Typography>
+            </Grid>
             <Grid
               container
               sx={{ gap: 2, mt: 4 }}
@@ -150,6 +162,14 @@ export default function RobotsCard({ description, onChange: handleChange }) {
                   {i}
                 </Grid>
               ))}
+            </Grid>
+            <Grid sx={{ display: 'flex', justifyContent: 'space-between' }}>
+              <Typography>برانگیخته</Typography>
+              <img
+                src={horizontalVector}
+                className={classes.horizontalVectorImg}
+              />
+              <Typography>آرام</Typography>
             </Grid>
           </>
         ) : (
