@@ -3,7 +3,8 @@ import { useState, useEffect } from 'react';
 
 import Grid from '@mui/material/Grid';
 import Card from '@mui/material/Card';
-import { makeStyles } from '@mui/styles';
+import { makeStyles, useTheme } from '@mui/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
 import Typography from '@mui/material/Typography';
 import Radio from '@mui/material/Radio';
 
@@ -21,18 +22,32 @@ import a3 from '../assets/images/a3.png';
 import a4 from '../assets/images/a4.png';
 import a5 from '../assets/images/a5.png';
 
-const useStyles = makeStyles({
+import vector from '../assets/images/vector.png';
+
+const useStyles = makeStyles((theme) => ({
   container: {
     width: '50rem',
+    [theme.breakpoints.down('sm')]: {
+      width: '22rem',
+    },
   },
   imageContainer: {
     width: '100%',
     height: '100%',
     objectFit: 'cover',
   },
-});
+  vectorImg: {
+    height: '66rem',
+    width: '4rem',
+    marginRight: '-1rem',
+  },
+}));
+
 export default function RobotsCard({ description, onChange: handleChange }) {
   const classes = useStyles();
+  const theme = useTheme();
+  const matches = useMediaQuery(theme.breakpoints.up('sm'));
+
   const [valence, setValence] = useState(null);
   const [arousal, setArousal] = useState(null);
 
@@ -52,88 +67,197 @@ export default function RobotsCard({ description, onChange: handleChange }) {
             {description}
           </Typography>
         </Grid>
-        <Grid
-          container
-          sx={{ gap: 2 }}
-          wrap="nowrap"
-          alignItems="center"
-          flexDirection="row-reverse"
-        >
-          {[v1, v2, v3, v4, v5].map((v, index) => (
-            <Grid key={`v${index + 1}`} item xs={3}>
-              <Card>
-                <img
-                  src={v}
-                  alt={`v${index + 1}`}
-                  className={classes.imageContainer}
-                />
-              </Card>
+        {matches ? (
+          <>
+            <Grid
+              container
+              sx={{ gap: 2 }}
+              wrap="nowrap"
+              alignItems="center"
+              flexDirection="row-reverse"
+            >
+              {[v1, v2, v3, v4, v5].map((v, index) => (
+                <Grid key={`v${index + 1}`} item xs={3}>
+                  <Card>
+                    <img
+                      src={v}
+                      alt={`v${index + 1}`}
+                      className={classes.imageContainer}
+                    />
+                  </Card>
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
-        <Grid
-          container
-          sx={{ mr: 4.75 }}
-          wrap="nowrap"
-          alignItems="center"
-          justifyContent="space-between"
-          flexDirection="row-reverse"
-        >
-          <Grid item xs={1}></Grid>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-            <Grid item key={i} xs={1}>
-              <Radio
-                disableRipple
-                checked={valence === i}
-                onChange={() => setValence(i)}
-                value={i}
-                name="radio-buttons"
-              />
-              {i}
+            <Grid
+              container
+              sx={{ mr: 4.75 }}
+              wrap="nowrap"
+              alignItems="center"
+              justifyContent="space-between"
+              flexDirection="row-reverse"
+            >
+              <Grid item xs={1}></Grid>
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
+                <Grid item key={i} xs={1}>
+                  <Radio
+                    disableRipple
+                    checked={valence === i}
+                    onChange={() => setValence(i)}
+                    value={i}
+                    name="radio-buttons"
+                  />
+                  {i}
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
-        <Grid
-          container
-          sx={{ gap: 2, mt: 4 }}
-          wrap="nowrap"
-          alignItems="center"
-          flexDirection="row-reverse"
-        >
-          {[a1, a2, a3, a4, a5].map((a, index) => (
-            <Grid key={`a${index + 1}`} item xs={3}>
-              <Card>
-                <img
-                  src={a}
-                  alt={`a${index + 1}`}
-                  className={classes.imageContainer}
-                />
-              </Card>
+            <Grid
+              container
+              sx={{ gap: 2, mt: 4 }}
+              wrap="nowrap"
+              alignItems="center"
+              flexDirection="row-reverse"
+            >
+              {[a1, a2, a3, a4, a5].map((a, index) => (
+                <Grid key={`a${index + 1}`} item xs={3}>
+                  <Card>
+                    <img
+                      src={a}
+                      alt={`a${index + 1}`}
+                      className={classes.imageContainer}
+                    />
+                  </Card>
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
-        <Grid
-          container
-          sx={{ mr: 4.75 }}
-          wrap="nowrap"
-          alignItems="center"
-          justifyContent="space-between"
-          flexDirection="row-reverse"
-        >
-          <Grid item xs={1}></Grid>
-          {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-            <Grid item key={i} xs={1} justifyContent="flex-start">
-              <Radio
-                disableRipple
-                checked={arousal === i}
-                onChange={() => setArousal(i)}
-                value={i}
-                name="radio-buttons"
-              />
-              {i}
+            <Grid
+              container
+              sx={{ mr: 4.75 }}
+              wrap="nowrap"
+              alignItems="center"
+              justifyContent="space-between"
+              flexDirection="row-reverse"
+            >
+              <Grid item xs={1}></Grid>
+              {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
+                <Grid item key={i} xs={1} justifyContent="flex-start">
+                  <Radio
+                    disableRipple
+                    checked={arousal === i}
+                    onChange={() => setArousal(i)}
+                    value={i}
+                    name="radio-buttons"
+                  />
+                  {i}
+                </Grid>
+              ))}
             </Grid>
-          ))}
-        </Grid>
+          </>
+        ) : (
+          <>
+            <Grid container justifyContent="space-between">
+              <Grid item xs={1} sx={{ height: '100%' }}>
+                <Typography>ناخوشایند</Typography>
+                <img src={vector} className={classes.vectorImg} />
+                <Typography>خوشایند</Typography>
+              </Grid>
+              <Grid
+                item
+                xs={3}
+                container
+                alignItems="center"
+                justifyContent="space-between"
+                flexDirection="column"
+              >
+                <Grid item />
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
+                  <Grid item key={i} sx={{ mt: 1 }}>
+                    <Radio
+                      disableRipple
+                      checked={valence === i}
+                      onChange={() => setValence(i)}
+                      value={i}
+                      name="radio-buttons"
+                    />
+                    {i}
+                  </Grid>
+                ))}
+                <Grid item />
+              </Grid>
+              <Grid
+                item
+                xs={7}
+                container
+                sx={{ gap: 5 }}
+                wrap="wrap"
+                alignItems="center"
+                flexDirection="row-reverse"
+              >
+                {[v1, v2, v3, v4, v5].map((v, index) => (
+                  <Grid key={`v${index + 1}`} item xs={12}>
+                    <Card>
+                      <img
+                        src={v}
+                        alt={`v${index + 1}`}
+                        className={classes.imageContainer}
+                      />
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+            </Grid>
+            <Grid container justifyContent="space-between" sx={{ mt: 10 }}>
+              <Grid item xs={1} sx={{ height: '100%' }}>
+                <Typography>آرام</Typography>
+                <img src={vector} className={classes.vectorImg} />
+                <Typography>برانگیخته</Typography>
+              </Grid>
+              <Grid
+                item
+                xs={3}
+                container
+                alignItems="center"
+                justifyContent="space-between"
+                flexDirection="column"
+              >
+                <Grid item />
+                {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
+                  <Grid item key={i}>
+                    <Radio
+                      disableRipple
+                      checked={arousal === i}
+                      onChange={() => setArousal(i)}
+                      value={i}
+                      name="radio-buttons"
+                    />
+                    {i}
+                  </Grid>
+                ))}
+                <Grid item />
+              </Grid>
+              <Grid
+                item
+                xs={7}
+                container
+                sx={{ gap: 5 }}
+                wrap="wrap"
+                alignItems="center"
+                flexDirection="row-reverse"
+              >
+                {[a1, a2, a3, a4, a5].map((a, index) => (
+                  <Grid key={`a${index + 1}`} item xs={12}>
+                    <Card>
+                      <img
+                        src={a}
+                        alt={`a${index + 1}`}
+                        className={classes.imageContainer}
+                      />
+                    </Card>
+                  </Grid>
+                ))}
+              </Grid>
+            </Grid>
+          </>
+        )}
       </ContentWrapper>
     </div>
   );
