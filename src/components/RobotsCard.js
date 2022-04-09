@@ -28,6 +28,7 @@ import horizontalVector from '../assets/images/horizontalVector.png';
 const useStyles = makeStyles((theme) => ({
   container: {
     width: '50rem',
+    marginTop: '-2rem',
     [theme.breakpoints.down('sm')]: {
       width: '22rem',
     },
@@ -38,7 +39,7 @@ const useStyles = makeStyles((theme) => ({
     objectFit: 'cover',
   },
   vectorImg: {
-    height: '79rem',
+    height: '75rem',
     width: '4rem',
     marginRight: '-1rem',
   },
@@ -132,7 +133,7 @@ export default function RobotsCard({ description, onChange: handleChange }) {
                   value={10}
                   name="radio-buttons"
                 />
-                <Typography>{'>..'}</Typography>
+                <Typography>{'..>'}</Typography>
               </Grid>
             </Grid>
             <Grid sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -202,7 +203,7 @@ export default function RobotsCard({ description, onChange: handleChange }) {
                   value={10}
                   name="radio-buttons"
                 />
-                <Typography>{'>..'}</Typography>
+                <Typography>{'..>'}</Typography>
               </Grid>
             </Grid>
             <Grid sx={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -238,7 +239,7 @@ export default function RobotsCard({ description, onChange: handleChange }) {
                     value={0}
                     name="radio-buttons"
                   />
-                  <Typography>{'>..'}</Typography>
+                  <Typography>{'<..'}</Typography>
                 </Grid>
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
                   <>
@@ -268,14 +269,14 @@ export default function RobotsCard({ description, onChange: handleChange }) {
                     value={10}
                     name="radio-buttons"
                   />
-                  <Typography>{'<..'}</Typography>
+                  <Typography>{'..>'}</Typography>
                 </Grid>{' '}
               </Grid>
               <Grid
                 item
                 xs={7}
                 container
-                // sx={{ gap: }}
+                sx={{ gap: 0 }}
                 wrap="wrap"
                 alignItems="center"
                 flexDirection="row-reverse"
@@ -315,7 +316,7 @@ export default function RobotsCard({ description, onChange: handleChange }) {
                     value={0}
                     name="radio-buttons"
                   />
-                  <Typography>{'>..'}</Typography>
+                  <Typography>{'<..'}</Typography>
                 </Grid>
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
                   <>
@@ -345,14 +346,14 @@ export default function RobotsCard({ description, onChange: handleChange }) {
                     value={10}
                     name="radio-buttons"
                   />
-                  <Typography>{'<..'}</Typography>
+                  <Typography>{'..>'}</Typography>
                 </Grid>{' '}
               </Grid>
               <Grid
                 item
                 xs={7}
                 container
-                sx={{ gap: 5 }}
+                sx={{ gap: 2 }}
                 wrap="wrap"
                 alignItems="center"
                 flexDirection="row-reverse"
