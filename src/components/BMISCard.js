@@ -97,7 +97,7 @@ export default function BasicTable({ buttonTitle, onClick: handleClick }) {
           <TableHead>
             <TableRow>
               <TableCell></TableCell>
-              <TableCell align="right">کاملاً این احساس را دارم</TableCell>
+              <TableCell align="right">خیلی این احساس را دارم</TableCell>
               <TableCell align="right">کمی این احساس را دارم </TableCell>
               <TableCell align="right">چنین احساسی ندارم </TableCell>
               <TableCell align="right">اصلاً چنین احساسی ندارم</TableCell>

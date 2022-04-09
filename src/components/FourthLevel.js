@@ -8,7 +8,6 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import AddIcon from '@mui/icons-material/Add';
 
-import RobotsCard from './RobotsCard';
 import ContentWrapper from '../assets/ContentWrapper';
 
 const useStyles = makeStyles((theme) => ({

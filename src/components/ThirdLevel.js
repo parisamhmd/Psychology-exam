@@ -122,6 +122,7 @@ export default function ThirdLevel({ type, images, onClick: handleClick }) {
         </>
       ) : show === 'robots' ? (
         <RobotsCard
+          hasExtraButton
           description="
           لطفا احساس خود را با انتخاب یک عدد (از 1 تا 9) از آدمک‌های ردیف اول و یک عدد از آدمک‌های ردیف دوم (1 تا 9) نشان دهید.
           "
