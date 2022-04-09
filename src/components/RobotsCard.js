@@ -38,7 +38,7 @@ const useStyles = makeStyles((theme) => ({
     objectFit: 'cover',
   },
   vectorImg: {
-    height: '66rem',
+    height: '79rem',
     width: '4rem',
     marginRight: '-1rem',
   },
@@ -56,7 +56,7 @@ export default function RobotsCard({ description, onChange: handleChange }) {
   const [arousal, setArousal] = useState(null);
 
   useEffect(() => {
-    if (valence && arousal) {
+    if (valence !== null && arousal !== null) {
       setTimeout(function () {
         handleChange(valence, arousal);
       }, 150);
@@ -75,7 +75,7 @@ export default function RobotsCard({ description, onChange: handleChange }) {
           <>
             <Grid
               container
-              sx={{ gap: 2 }}
+              sx={{ gap: 3 }}
               wrap="nowrap"
               alignItems="center"
               flexDirection="row-reverse"
@@ -94,25 +94,46 @@ export default function RobotsCard({ description, onChange: handleChange }) {
             </Grid>
             <Grid
               container
-              sx={{ mr: 4.75 }}
               wrap="nowrap"
               alignItems="center"
               justifyContent="space-between"
               flexDirection="row-reverse"
             >
-              <Grid item xs={1}></Grid>
+              <Grid item xs={1} sx={{ ml: -1 }}>
+                <Radio
+                  disableRipple
+                  checked={valence === 0}
+                  onChange={() => setValence(0)}
+                  value={0}
+                  name="radio-buttons"
+                />
+                <Typography>{'<..'}</Typography>
+              </Grid>
               {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-                <Grid item key={i} xs={1}>
-                  <Radio
-                    disableRipple
-                    checked={valence === i}
-                    onChange={() => setValence(i)}
-                    value={i}
-                    name="radio-buttons"
-                  />
-                  {i}
-                </Grid>
+                <>
+                  <Grid item key={i} xs={8}>
+                    <Radio
+                      disableRipple
+                      checked={valence === i}
+                      onChange={() => setValence(i)}
+                      value={i}
+                      name="radio-buttons"
+                    />
+                    <Typography>{i}</Typography>
+                  </Grid>
+                  <Grid item key={i} xs={1} justifyContent="flex-start"></Grid>
+                </>
               ))}
+              <Grid item xs={1} sx={{ mr: -2 }}>
+                <Radio
+                  disableRipple
+                  checked={valence === 10}
+                  onChange={() => setValence(10)}
+                  value={10}
+                  name="radio-buttons"
+                />
+                <Typography>{'>..'}</Typography>
+              </Grid>
             </Grid>
             <Grid sx={{ display: 'flex', justifyContent: 'space-between' }}>
               <Typography>خوشایند</Typography>
@@ -124,7 +145,7 @@ export default function RobotsCard({ description, onChange: handleChange }) {
             </Grid>
             <Grid
               container
-              sx={{ gap: 2, mt: 4 }}
+              sx={{ gap: 3, mt: 4 }}
               wrap="nowrap"
               alignItems="center"
               flexDirection="row-reverse"
@@ -143,25 +164,46 @@ export default function RobotsCard({ description, onChange: handleChange }) {
             </Grid>
             <Grid
               container
-              sx={{ mr: 4.75 }}
               wrap="nowrap"
               alignItems="center"
               justifyContent="space-between"
               flexDirection="row-reverse"
             >
-              <Grid item xs={1}></Grid>
+              <Grid item xs={1} sx={{ ml: -1 }}>
+                <Radio
+                  disableRipple
+                  checked={arousal === 0}
+                  onChange={() => setArousal(0)}
+                  value={0}
+                  name="radio-buttons"
+                />
+                <Typography>{'<..'}</Typography>
+              </Grid>
               {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-                <Grid item key={i} xs={1} justifyContent="flex-start">
-                  <Radio
-                    disableRipple
-                    checked={arousal === i}
-                    onChange={() => setArousal(i)}
-                    value={i}
-                    name="radio-buttons"
-                  />
-                  {i}
-                </Grid>
+                <>
+                  <Grid item key={i} xs={8} justifyContent="flex-start">
+                    <Radio
+                      disableRipple
+                      checked={arousal === i}
+                      onChange={() => setArousal(i)}
+                      value={i}
+                      name="radio-buttons"
+                    />
+                    <Typography>{i}</Typography>
+                  </Grid>
+                  <Grid item key={i} xs={1} justifyContent="flex-start"></Grid>
+                </>
               ))}
+              <Grid item xs={1} sx={{ mr: -2 }}>
+                <Radio
+                  disableRipple
+                  checked={arousal === 10}
+                  onChange={() => setArousal(10)}
+                  value={10}
+                  name="radio-buttons"
+                />
+                <Typography>{'>..'}</Typography>
+              </Grid>
             </Grid>
             <Grid sx={{ display: 'flex', justifyContent: 'space-between' }}>
               <Typography>برانگیخته</Typography>
@@ -188,26 +230,52 @@ export default function RobotsCard({ description, onChange: handleChange }) {
                 justifyContent="space-between"
                 flexDirection="column"
               >
-                <Grid item />
+                <Grid item container sx={{ mt: 1 }} alignItems="center">
+                  <Radio
+                    disableRipple
+                    checked={valence === 0}
+                    onChange={() => setValence(0)}
+                    value={0}
+                    name="radio-buttons"
+                  />
+                  <Typography>{'>..'}</Typography>
+                </Grid>
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-                  <Grid item key={i} sx={{ mt: 1 }}>
-                    <Radio
-                      disableRipple
-                      checked={valence === i}
-                      onChange={() => setValence(i)}
-                      value={i}
-                      name="radio-buttons"
-                    />
-                    {i}
-                  </Grid>
+                  <>
+                    <Grid item />
+                    <Grid item key={i}>
+                      <Radio
+                        disableRipple
+                        checked={valence === i}
+                        onChange={() => setValence(i)}
+                        value={i}
+                        name="radio-buttons"
+                      />
+                      {i}
+                    </Grid>
+                  </>
                 ))}
-                <Grid item />
+                <Grid
+                  item
+                  container
+                  alignItems="center"
+                  sx={{ mb: 1, mt: 2.5 }}
+                >
+                  <Radio
+                    disableRipple
+                    checked={valence === 10}
+                    onChange={() => setValence(10)}
+                    value={10}
+                    name="radio-buttons"
+                  />
+                  <Typography>{'<..'}</Typography>
+                </Grid>{' '}
               </Grid>
               <Grid
                 item
                 xs={7}
                 container
-                sx={{ gap: 5 }}
+                // sx={{ gap: }}
                 wrap="wrap"
                 alignItems="center"
                 flexDirection="row-reverse"
@@ -239,20 +307,46 @@ export default function RobotsCard({ description, onChange: handleChange }) {
                 justifyContent="space-between"
                 flexDirection="column"
               >
-                <Grid item />
+                <Grid item container sx={{ mt: 1 }} alignItems="center">
+                  <Radio
+                    disableRipple
+                    checked={arousal === 0}
+                    onChange={() => setArousal(0)}
+                    value={0}
+                    name="radio-buttons"
+                  />
+                  <Typography>{'>..'}</Typography>
+                </Grid>
                 {[1, 2, 3, 4, 5, 6, 7, 8, 9].map((i) => (
-                  <Grid item key={i}>
-                    <Radio
-                      disableRipple
-                      checked={arousal === i}
-                      onChange={() => setArousal(i)}
-                      value={i}
-                      name="radio-buttons"
-                    />
-                    {i}
-                  </Grid>
+                  <>
+                    <Grid item />
+                    <Grid item key={i}>
+                      <Radio
+                        disableRipple
+                        checked={arousal === i}
+                        onChange={() => setArousal(i)}
+                        value={i}
+                        name="radio-buttons"
+                      />
+                      {i}
+                    </Grid>
+                  </>
                 ))}
-                <Grid item />
+                <Grid
+                  item
+                  container
+                  alignItems="center"
+                  sx={{ mb: 1, mt: 2.5 }}
+                >
+                  <Radio
+                    disableRipple
+                    checked={arousal === 10}
+                    onChange={() => setArousal(10)}
+                    value={10}
+                    name="radio-buttons"
+                  />
+                  <Typography>{'<..'}</Typography>
+                </Grid>{' '}
               </Grid>
               <Grid
                 item
