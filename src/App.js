@@ -175,7 +175,7 @@ function App() {
           onClick={(data) => {
             setApplyData({
               ...applyData,
-              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(
+              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(
                 (item) => ({
                   image: item,
                   ...data[item],
@@ -186,7 +186,7 @@ function App() {
               'applyData',
               JSON.stringify({
                 ...applyData,
-                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(
+                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(
                   (item) => ({
                     image: item,
                     ...data[item],
@@ -217,7 +217,7 @@ function App() {
             console.log(data);
             setApplyData({
               ...applyData,
-              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(
+              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(
                 (item) => ({
                   ...data[item],
                   ...applyData.image_actions[item - 1],
@@ -228,7 +228,7 @@ function App() {
               'applyData',
               JSON.stringify({
                 ...applyData,
-                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(
+                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(
                   (item) => ({
                     ...data[item],
                     ...applyData.image_actions[item - 1],
@@ -257,7 +257,7 @@ function App() {
           onClick={(data) => {
             setApplyData({
               ...applyData,
-              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(
+              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(
                 (item) => ({
                   ...data[item],
                   ...applyData.image_actions[item - 1],
@@ -269,7 +269,7 @@ function App() {
               'applyData',
               JSON.stringify({
                 ...applyData,
-                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map(
+                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(
                   (item) => ({
                     ...data[item],
                     ...applyData.image_actions[item - 1],
