@@ -175,23 +175,25 @@ function App() {
           onClick={(data) => {
             setApplyData({
               ...applyData,
-              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(
-                (item) => ({
-                  image: item,
-                  ...data[item],
-                })
-              ),
+              image_actions: Array.from(
+                { length: images?.length },
+                (_, i) => i + 1
+              ).map((item) => ({
+                image: item,
+                ...data[item],
+              })),
             });
             localStorage.setItem(
               'applyData',
               JSON.stringify({
                 ...applyData,
-                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(
-                  (item) => ({
-                    image: item,
-                    ...data[item],
-                  })
-                ),
+                image_actions: Array.from(
+                  { length: images?.length },
+                  (_, i) => i + 1
+                ).map((item) => ({
+                  image: item,
+                  ...data[item],
+                })),
               })
             );
             localStorage.setItem('step', 6);
@@ -217,23 +219,25 @@ function App() {
             console.log(data);
             setApplyData({
               ...applyData,
-              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(
-                (item) => ({
-                  ...data[item],
-                  ...applyData.image_actions[item - 1],
-                })
-              ),
+              image_actions: Array.from(
+                { length: images?.length },
+                (_, i) => i + 1
+              ).map((item) => ({
+                ...data[item],
+                ...applyData.image_actions[item - 1],
+              })),
             });
             localStorage.setItem(
               'applyData',
               JSON.stringify({
                 ...applyData,
-                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(
-                  (item) => ({
-                    ...data[item],
-                    ...applyData.image_actions[item - 1],
-                  })
-                ),
+                image_actions: Array.from(
+                  { length: images?.length },
+                  (_, i) => i + 1
+                ).map((item) => ({
+                  ...data[item],
+                  ...applyData.image_actions[item - 1],
+                })),
               })
             );
             localStorage.setItem('step', 7);
@@ -257,24 +261,26 @@ function App() {
           onClick={(data) => {
             setApplyData({
               ...applyData,
-              image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(
-                (item) => ({
-                  ...data[item],
-                  ...applyData.image_actions[item - 1],
-                })
-              ),
+              image_actions: Array.from(
+                { length: images?.length },
+                (_, i) => i + 1
+              ).map((item) => ({
+                ...data[item],
+                ...applyData.image_actions[item - 1],
+              })),
             });
 
             localStorage.setItem(
               'applyData',
               JSON.stringify({
                 ...applyData,
-                image_actions: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13].map(
-                  (item) => ({
-                    ...data[item],
-                    ...applyData.image_actions[item - 1],
-                  })
-                ),
+                image_actions: Array.from(
+                  { length: images?.length },
+                  (_, i) => i + 1
+                ).map((item) => ({
+                  ...data[item],
+                  ...applyData.image_actions[item - 1],
+                })),
               })
             );
             localStorage.setItem('step', 8);
