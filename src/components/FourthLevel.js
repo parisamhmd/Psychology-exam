@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function FourthLevel({ type, images, onClick: handleClick }) {
+export default function FourthLevel({ images, onClick: handleClick }) {
   const classes = useStyles();
 
   const [item, setItem] = React.useState(0);
@@ -153,7 +153,7 @@ export default function FourthLevel({ type, images, onClick: handleClick }) {
   );
   return (
     <div>
-      {item < 11 ? (
+      {item < images?.length ? (
         renderTrial()
       ) : (
         <ContentWrapper>

@@ -145,7 +145,7 @@ export default function ThirdLevel({ type, images, onClick: handleClick }) {
   );
   return (
     <div>
-      {item < 11 ? (
+      {item < images?.length ? (
         renderTrial()
       ) : (
         <ContentWrapper>

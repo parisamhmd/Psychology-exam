@@ -169,7 +169,7 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
   );
   return (
     <div>
-      {item < 11 ? (
+      {item < images?.length ? (
         renderTrial()
       ) : (
         <ContentWrapper>
@@ -186,9 +186,9 @@ export default function ShowImages({ type, images, onClick: handleClick }) {
             ورود به مرحلۀ سوم آزمون{' '}
           </Button>
           <Typography variant="h5">
-            در این مرحله 11 تصویر ناخوشایند را برای بار دوم خواهید دید تا تجربۀ
-            هیجانی شما در مواجهه با تصاویر و حالت‌های مختلف ثبت شود. لطفاً طبق
-            دستورالعمل‌هایی که طی آزمون داده می‌شود عمل کنید.{' '}
+            در این مرحله {images?.length} تصویر ناخوشایند را برای بار دوم خواهید
+            دید تا تجربۀ هیجانی شما در مواجهه با تصاویر و حالت‌های مختلف ثبت
+            شود. لطفاً طبق دستورالعمل‌هایی که طی آزمون داده می‌شود عمل کنید.{' '}
           </Typography>
         </ContentWrapper>
       )}
