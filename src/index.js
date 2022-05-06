@@ -10,7 +10,7 @@ import theme from './assets/theme';
 import './index.css';
 import App from './App';
 
-axios.defaults.baseURL = 'http://5.160.1.186:13001/task';
+axios.defaults.baseURL = 'http://5.160.1.186:13002/task';
 
 const queryClient = new QueryClient({
   defaultOptions: {
